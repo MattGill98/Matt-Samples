@@ -22,6 +22,7 @@
         <module>vaadin-test</module>
         <module>enterprise-app-test</module>
         <module>jaxrs-hello-world</module>
+	<module>jms-test</module>
     </modules>
     
 </project>
