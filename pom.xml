@@ -23,6 +23,7 @@
         <module>enterprise-app-test</module>
         <module>jaxrs-hello-world</module>
 	<module>jms-test</module>
+	<module>cdi-ear-test</module>
     </modules>
     
 </project>

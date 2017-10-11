@@ -9,25 +9,10 @@
     
     <name>JMS Test</name>
     
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
-    
     <modules>
         <module>jms-message-board-core</module>
         <module>jms-message-board-post</module>
         <module>jms-message-board-receive</module>
     </modules>
-    
-    <dependencies>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
     
 </project>
