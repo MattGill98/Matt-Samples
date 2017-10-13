@@ -7,7 +7,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     
-    <name>cdi-ear-test</name>
+    <name>CDI EAR Test</name>
+    <description>A Test EAR which injects an EJB in different ways, to show how CDI is handled in EARs</description>
     
     <modules>
         <module>cdi-test-ejb</module>

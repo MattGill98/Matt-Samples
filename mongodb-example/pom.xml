@@ -7,7 +7,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>mongodb-example</name>
+    <name>MongoDB Sample</name>
+    <description>A test project to show how objects can be persisted to a NoSQL database</description>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

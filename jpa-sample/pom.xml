@@ -7,7 +7,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>jpa-sample</name>
+    <name>JPA Sample</name>
+    <description>A test project which provides endpoints to log items to a MySql database, using CDI interceptors, JAX-RS endpoints and JTA</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

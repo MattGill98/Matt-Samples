@@ -7,7 +7,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>jaxrs-hello-world</name>
+    <name>JAX-RS Hello World</name>
+    <description>A test project which hosts a 'Hello World' endpoint, and use a JAX-RS extension to log each time it is visited</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

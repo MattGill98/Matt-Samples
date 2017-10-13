@@ -7,7 +7,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>rest-request</name>
+    <name>Rest Request</name>
+    <description>A test project to show how JSF can use the Jersey client API to make REST requests (bad practice, but cool)</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

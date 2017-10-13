@@ -7,7 +7,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>vaadin-test</name>
+    <name>Vaadin (CDI) Test</name>
+    <description>A test project to show how Vaadin can be integrated with CDI</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
