@@ -1,13 +1,13 @@
-package uk.me.mattgill.samples.jaxrs.hello.world;
+package uk.me.mattgill.samples.jaxrs.hello.world.service.resource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import uk.me.mattgill.samples.jaxrs.hello.world.filter.annotations.TracedEndpoint;
+import uk.me.mattgill.samples.jaxrs.hello.world.api.TracedEndpoint;
 
 @Path("/hello")
-public class HelloWorldEndpoint {
+public class HelloWorldResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)

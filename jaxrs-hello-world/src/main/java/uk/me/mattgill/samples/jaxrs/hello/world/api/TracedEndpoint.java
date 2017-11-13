@@ -1,4 +1,4 @@
-package uk.me.mattgill.samples.jaxrs.hello.world.filter.annotations;
+package uk.me.mattgill.samples.jaxrs.hello.world.api;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
