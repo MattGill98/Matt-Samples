@@ -9,12 +9,6 @@ import org.slf4j.LoggerFactory;
 @Dependent
 public class LoggingManager {
 
-    static {
-        System.setProperty("org.slf4j.simpleLogger.showLogName", "false");
-        System.setProperty("org.slf4j.simpleLogger.showThreadName", "false");
-        System.setProperty("org.slf4j.simpleLogger.levelInBrackets", "true");
-    }
-
     @Produces
     public Logger producerLogger(InjectionPoint injectionPoint) {
         return LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass());
