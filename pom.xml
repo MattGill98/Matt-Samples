@@ -24,6 +24,7 @@
 	<module>jms-test</module>
 	<module>cdi-ear-test</module>
         <module>mqtt-test</module>
+        <module>kafka-test</module>
   </modules>
     
 </project>

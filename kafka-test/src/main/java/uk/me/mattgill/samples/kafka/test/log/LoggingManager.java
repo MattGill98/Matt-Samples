@@ -1,4 +1,4 @@
-package uk.me.mattgill.samples.mqtt.test.log;
+package uk.me.mattgill.samples.kafka.test.log;
 
 import java.util.logging.Logger;
 import javax.enterprise.context.Dependent;

@@ -3,14 +3,14 @@ package uk.me.mattgill.samples.mqtt.test.message.out;
 import fish.payara.cloud.connectors.mqtt.api.MQTTConnection;
 import fish.payara.cloud.connectors.mqtt.api.MQTTConnectionFactory;
 import java.util.UUID;
-import javax.annotation.PostConstruct;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.ejb.Schedule;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.resource.ConnectionFactoryDefinition;
 import javax.resource.spi.TransactionSupport;
-import org.slf4j.Logger;
 
 @ConnectionFactoryDefinition(name = "java:module/env/MQTTConnectionFactory",
         description = "MQTT Connection Factory",
@@ -40,7 +40,7 @@ public class MqttMessageSender {
         try (MQTTConnection conn = factory.getConnection()) {
             conn.publish("fish/payara/cloud/test/mosquitto", message.getBytes(), 1, false);
         } catch (Exception ex) {
-            logger.error("Error sending message", ex);
+            logger.log(Level.WARNING, "Error sending message: {0}", ex.getMessage());
         }
     }
 

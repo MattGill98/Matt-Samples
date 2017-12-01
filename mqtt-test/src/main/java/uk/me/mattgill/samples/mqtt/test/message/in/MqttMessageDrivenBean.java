@@ -2,13 +2,13 @@ package uk.me.mattgill.samples.mqtt.test.message.in;
 
 import fish.payara.cloud.connectors.mqtt.api.MQTTListener;
 import fish.payara.cloud.connectors.mqtt.api.OnMQTTMessage;
+import java.util.logging.Logger;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.slf4j.Logger;
 
 @MessageDriven(activationConfig = {
     @ActivationConfigProperty(propertyName = "serverURIs", propertyValue = "tcp://test.mosquitto.org:1883"),
