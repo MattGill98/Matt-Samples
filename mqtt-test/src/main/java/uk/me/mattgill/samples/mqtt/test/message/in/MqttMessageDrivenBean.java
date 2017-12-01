@@ -14,7 +14,6 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
     @ActivationConfigProperty(propertyName = "serverURIs", propertyValue = "tcp://test.mosquitto.org:1883"),
     @ActivationConfigProperty(propertyName = "cleanSession", propertyValue = "false"),
     @ActivationConfigProperty(propertyName = "automaticReconnect", propertyValue = "true"),
-    @ActivationConfigProperty(propertyName = "filePersistence", propertyValue = "false"),
     @ActivationConfigProperty(propertyName = "connectionTimeout", propertyValue = "30"),
     @ActivationConfigProperty(propertyName = "maxInflight", propertyValue = "3"),
     @ActivationConfigProperty(propertyName = "keepAliveInterval", propertyValue = "5"),

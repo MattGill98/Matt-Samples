@@ -62,7 +62,7 @@
                         <artifactItem>
                             <groupId>fish.payara.cloud.connectors.mqtt</groupId>
                             <artifactId>mqtt-rar</artifactId>
-                            <version>0.1.0</version>
+                            <version>0.2.0</version>
                             <type>rar</type>
                         </artifactItem>
                     </deployArtifacts>
