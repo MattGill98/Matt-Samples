@@ -26,6 +26,7 @@
         <module>mqtt-test</module>
         <module>kafka-test</module>
         <module>sample-utils</module>
-  </modules>
+        <module>grizzly-test</module>
+    </modules>
     
 </project>
