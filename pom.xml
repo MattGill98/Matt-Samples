@@ -27,6 +27,7 @@
         <module>kafka-test</module>
         <module>sample-utils</module>
         <module>grizzly-test</module>
+        <module>logging-test</module>
     </modules>
     
 </project>
