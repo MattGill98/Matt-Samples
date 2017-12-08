@@ -6,7 +6,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import uk.me.mattgill.samples.jaxrs.hello.world.api.TracedEndpoint;
 
-@Path("/hello")
+@Path("/")
 public class HelloWorldResource {
 
     @GET
