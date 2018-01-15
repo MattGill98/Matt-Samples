@@ -27,14 +27,26 @@ public class CdiBean implements Serializable {
 
     private Logger logger = Logger.getLogger(CdiBean.class.getName());
 
+    /**
+     * List of most recent 10 received in this view.
+     */
     private List<String> messages;
 
+    /**
+     * Cdi event for firing messages.
+     */
     @Inject
     private Event<String> event;
 
+    /**
+     * PushContext for updating the message list over AJAX.
+     */
     @Inject @Push
     private PushContext push;
 
+    /**
+     * FacesContext for fetching request parameter data.
+     */
     @Inject
     private FacesContext config;
 
