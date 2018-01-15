@@ -7,20 +7,24 @@
         <title>Events</title>
     </h:head>
     <h:body>
-        <h:form>
-            <!-- Button to fire event -->
-            <h:commandButton value="Load events" action="#{eventbusListener.fire}">
-                <f:ajax />
+        <!-- Form to enter message and submit it -->
+        <h:form id="form">
+            <h:inputText id="message" />
+            <h:commandButton value="Send message" action="#{cdiBean.fire}">
+                <f:ajax resetValues="true" render="message" />
             </h:commandButton>
-            <!-- Websocket to render the most recent message times whenever a message is received -->
-            <f:websocket channel="push">
-                <f:ajax event="updateTimes" render=":times" />
-            </f:websocket>
         </h:form>
-        <h:dataTable id="times" value="#{eventbusListener.messageTimes}" var="time">
+
+        <!-- Websocket to render the most recent messages whenever a message is received -->
+        <f:websocket channel="push">
+            <f:ajax event="listMessages" render=":messageTable" />
+        </f:websocket>
+
+        <!-- Table to show a list of the received messages -->
+        <h:dataTable id="messageTable" value="#{cdiBean.messages}" var="msg">
             <h:column>
-                <f:facet name="header">Message Times</f:facet>
-                #{time}
+                <f:facet name="header">Messages</f:facet>
+                #{msg}
             </h:column>
         </h:dataTable>
     </h:body>
