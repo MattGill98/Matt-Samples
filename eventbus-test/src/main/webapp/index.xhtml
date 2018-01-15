@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Events</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <!-- Button to fire event -->
+            <h:commandButton value="Load events" action="#{eventbusListener.fire}">
+                <f:ajax />
+            </h:commandButton>
+            <!-- Websocket to render the most recent message times whenever a message is received -->
+            <f:websocket channel="push">
+                <f:ajax event="updateTimes" render=":times" />
+            </f:websocket>
+        </h:form>
+        <h:dataTable id="times" value="#{eventbusListener.messageTimes}" var="time">
+            <h:column>
+                <f:facet name="header">Message Times</f:facet>
+                #{time}
+            </h:column>
+        </h:dataTable>
+    </h:body>
+</html>
