@@ -1,6 +1,8 @@
 package uk.me.mattgill.samples.cluster.ping.event.hazelcast;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -21,6 +23,15 @@ public class HazelcastResources {
      * the current instance if the cluster only contains itself.
      */
     public String getRandomInstanceId() {
+        return getRandomInstanceId(new LinkedList<>());
+    }
+
+    /**
+     * @return the ID of a random instance in the cluster. Will return
+     * the current instance if the cluster only contains itself.
+     * @param excludeList a list of instance IDs to not return.
+     */
+    public String getRandomInstanceId(List<String> excludeList) {
         // If hazelcast is disabled, return the current instance.
         if (instance == null) {
             return getLocalInstanceId();
@@ -29,11 +40,11 @@ public class HazelcastResources {
         // Get all cluster members
         Set<Member> members = new HashSet<>(instance.getCluster().getMembers());
 
-        // Remove the local instance, unless it's the only instance
+        // Remove everything from the exclude list, and the local instance (unless it's the only instance)
         if (members.size() <= 1) {
             return getLocalInstanceId();
         }
-        members.removeIf(x -> x.getUuid().equals(getLocalInstanceId()));
+        members.removeIf(x -> x.getUuid().equals(getLocalInstanceId()) || excludeList.contains(x.getUuid()));
 
         // Pick a random instance
         int randomInstanceNumber = new Random().nextInt(members.size());

@@ -35,4 +35,15 @@ public class MessageSender {
         });
     }
 
+    /**
+     * Send to a random instance in the cluster.
+     * 
+     * @param wrapper the wrapped message to send.
+     */
+    public void send(MessageWrapper wrapper) {
+        executor.execute(() -> {
+            event.fire(new MessageWrapper(wrapper, resources.getRandomInstanceId(wrapper.getVisitedInstances())));
+        });
+    }
+
 }

@@ -46,7 +46,7 @@ public class MessageReceiver {
      */
     private void receiveMessage(@Observes MessageWrapper messageWrapper) {
         // If the message is for the current instance
-        if (messageWrapper.getInstanceId().equals(resources.getLocalInstanceId())) {
+        if (messageWrapper.getTargetInstanceId().equals(resources.getLocalInstanceId())) {
 
             // Get the message contents
             TrackerMessage message = messageWrapper.getContents();
@@ -58,7 +58,7 @@ public class MessageReceiver {
             } else {
                 // Otherwise resend the message to a random instance
                 logger.log(Level.INFO, "Not found in waitlist. Resending message {0}.\n", message.toString());
-                sender.send(message);
+                sender.send(messageWrapper);
             }
         }
     }
