@@ -1,4 +1,4 @@
-package uk.me.mattgill.samples.jaxrs.cluster.ping.service.resource;
+package uk.me.mattgill.samples.cluster.ping.service.resource;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -14,13 +14,13 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import uk.me.mattgill.samples.jaxrs.cluster.ping.event.entity.TrackerMessage;
-import uk.me.mattgill.samples.jaxrs.cluster.ping.event.receive.MessageReceiver;
-import uk.me.mattgill.samples.jaxrs.cluster.ping.event.send.MessageSender;
+import uk.me.mattgill.samples.cluster.ping.event.entity.TrackerMessage;
+import uk.me.mattgill.samples.cluster.ping.event.management.MessageReceiver;
+import uk.me.mattgill.samples.cluster.ping.event.management.MessageSender;
 
 @Path("/")
 @RequestScoped
-public class HelloWorldResource {
+public class TrackerResource {
 
     @Inject
     private MessageReceiver receiver;

@@ -1,6 +1,8 @@
-package uk.me.mattgill.samples.jaxrs.cluster.ping.event.entity;
+package uk.me.mattgill.samples.cluster.ping.event.management.entity;
 
 import java.io.Serializable;
+
+import uk.me.mattgill.samples.cluster.ping.event.entity.TrackerMessage;
 
 /**
  * A wrapper for the {@link TrackerMessage}.

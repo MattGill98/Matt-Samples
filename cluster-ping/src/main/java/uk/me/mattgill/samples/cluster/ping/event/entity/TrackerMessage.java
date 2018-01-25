@@ -1,4 +1,4 @@
-package uk.me.mattgill.samples.jaxrs.cluster.ping.event.entity;
+package uk.me.mattgill.samples.cluster.ping.event.entity;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

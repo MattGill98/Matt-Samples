@@ -1,4 +1,4 @@
-package uk.me.mattgill.samples.jaxrs.cluster.ping.event.send;
+package uk.me.mattgill.samples.cluster.ping.event.management;
 
 import javax.annotation.Resource;
 import javax.enterprise.concurrent.ManagedExecutorService;
@@ -7,9 +7,9 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import fish.payara.micro.cdi.Outbound;
-import uk.me.mattgill.samples.jaxrs.cluster.ping.event.entity.HazelcastResources;
-import uk.me.mattgill.samples.jaxrs.cluster.ping.event.entity.MessageWrapper;
-import uk.me.mattgill.samples.jaxrs.cluster.ping.event.entity.TrackerMessage;
+import uk.me.mattgill.samples.cluster.ping.event.entity.TrackerMessage;
+import uk.me.mattgill.samples.cluster.ping.event.hazelcast.HazelcastResources;
+import uk.me.mattgill.samples.cluster.ping.event.management.entity.MessageWrapper;
 
 @Dependent
 public class MessageSender {

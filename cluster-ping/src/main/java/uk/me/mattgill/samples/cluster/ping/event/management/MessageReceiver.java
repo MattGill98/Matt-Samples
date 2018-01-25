@@ -1,4 +1,4 @@
-package uk.me.mattgill.samples.jaxrs.cluster.ping.event.receive;
+package uk.me.mattgill.samples.cluster.ping.event.management;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,10 +15,9 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
-import uk.me.mattgill.samples.jaxrs.cluster.ping.event.entity.HazelcastResources;
-import uk.me.mattgill.samples.jaxrs.cluster.ping.event.entity.MessageWrapper;
-import uk.me.mattgill.samples.jaxrs.cluster.ping.event.entity.TrackerMessage;
-import uk.me.mattgill.samples.jaxrs.cluster.ping.event.send.MessageSender;
+import uk.me.mattgill.samples.cluster.ping.event.entity.TrackerMessage;
+import uk.me.mattgill.samples.cluster.ping.event.hazelcast.HazelcastResources;
+import uk.me.mattgill.samples.cluster.ping.event.management.entity.MessageWrapper;
 
 @ApplicationScoped
 public class MessageReceiver {

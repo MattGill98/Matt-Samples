@@ -32,7 +32,7 @@
     	<module>jsf-cdi-test</module>
     	<module>eventbus-test</module>
     	<module>websocket-test</module>
-    	<module>jaxrs-cluster-ping</module>
+    	<module>cluster-ping</module>
     </modules>
     
 </project>

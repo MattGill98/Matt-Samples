@@ -1,4 +1,4 @@
-package uk.me.mattgill.samples.jaxrs.cluster.ping.service;
+package uk.me.mattgill.samples.cluster.ping.service;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
