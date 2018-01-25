@@ -5,41 +5,38 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.UUID;
 
+/**
+ * A message to be propogated across the cluster.
+ * Every time the message is deserialised, it increases the ping count
+ * as it has been received as a message.
+ */
 public class TrackerMessage implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final UUID id;
+    private final String id;
     private final String message;
     private int pingCount;
 
     public TrackerMessage(String message) {
         this.message = message;
         this.pingCount = 0;
-        this.id = UUID.randomUUID();
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof TrackerMessage) {
-            TrackerMessage c = (TrackerMessage) o;
-            if (id.equals(c.id)) {
-                return true;
-            }
-        }
-        return false;
+        this.id = UUID.randomUUID().toString();
     }
 
     /**
-     * Return the details of the message.
+     * @return the ID of the message.
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @return a String representation of the message.
      */
     @Override
     public String toString() {
-        return String.format("{id = '%6s', message = '%s', pingCount = '%d'}", id.toString(), message, pingCount);
+        return String.format("{id = '%s', message = '%s', pingCount = '%d'}", id, message, pingCount);
     }
 
     /**

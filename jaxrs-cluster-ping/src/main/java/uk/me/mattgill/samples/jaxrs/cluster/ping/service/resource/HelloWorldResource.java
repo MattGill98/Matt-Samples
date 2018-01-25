@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -27,10 +28,20 @@ public class HelloWorldResource {
     @Inject
     private MessageSender sender;
 
+    /**
+     * Endpoint for sending a message across the cluster.
+     * 
+     * @param messageText the text to send in the message. Defaults to 'Hello World!'.
+     * 
+     * @return the final contents of the message.
+     */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String helloWorld() {
-        TrackerMessage message = new TrackerMessage("Hello World!");
+    public String helloWorld(@QueryParam("message") String messageText) {
+        if (messageText == null || messageText.isEmpty()) {
+            messageText = "Hello World!";
+        }
+        TrackerMessage message = new TrackerMessage(messageText);
 
         try {
             // Send the message across the cluster.

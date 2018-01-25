@@ -3,7 +3,6 @@ package uk.me.mattgill.samples.jaxrs.cluster.ping.event.entity;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-import java.util.UUID;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -18,7 +17,7 @@ public class HazelcastResources {
     private HazelcastInstance instance;
 
     /**
-     * Gets the UUID of a random instance in the cluster. Will only return
+     * @return the ID of a random instance in the cluster. Will return
      * the current instance if the cluster only contains itself.
      */
     public String getRandomInstanceId() {
@@ -39,7 +38,7 @@ public class HazelcastResources {
     }
 
     /**
-     * Gets the UUID of the local instance.
+     * @return the ID of the current instance.
      */
     public String getLocalInstanceId() {
         return instance.getCluster().getLocalMember().getUuid();

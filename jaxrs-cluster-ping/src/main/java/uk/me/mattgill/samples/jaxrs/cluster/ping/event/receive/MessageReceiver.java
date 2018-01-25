@@ -2,12 +2,13 @@ package uk.me.mattgill.samples.jaxrs.cluster.ping.event.receive;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -22,34 +23,42 @@ import uk.me.mattgill.samples.jaxrs.cluster.ping.event.send.MessageSender;
 @ApplicationScoped
 public class MessageReceiver {
 
+    private final Logger logger = Logger.getLogger(MessageReceiver.class.getName());
+
     @Inject
     private HazelcastResources resources;
 
     @Inject
     private MessageSender sender;
 
-    private Map<UUID, CompletableFuture<TrackerMessage>> waitList;
+    private Map<String, CompletableFuture<TrackerMessage>> waitList;
 
     @PostConstruct
     public void init() {
         waitList = new HashMap<>();
     }
 
-    public void receiveMessage(@Observes MessageWrapper messageWrapper) {
+    /**
+     * Receives message events. If the message is for this instance,
+     * it checks to see if any request is currently waiting for the message.
+     * If it is, it is returned. Otherwise, it is resent to another random instance.
+     * 
+     * @param messageWrapper the received message.
+     */
+    private void receiveMessage(@Observes MessageWrapper messageWrapper) {
         // If the message is for the current instance
         if (messageWrapper.getInstanceId().equals(resources.getLocalInstanceId())) {
 
             // Get the message contents
             TrackerMessage message = messageWrapper.getContents();
-            System.out.printf("Message %s is for this instance.\n", message.toString());
 
             // If there is a thread waiting for this message
             if (waitList.containsKey(message.getId())) {
-                System.out.printf("Found in waitlist, completing message %s.\n", message.toString());
+                logger.log(Level.INFO, "Found in waitlist, completing message {0}.\n", message.toString());
                 waitList.get(message.getId()).complete(message);
             } else {
                 // Otherwise resend the message to a random instance
-                System.out.printf("Not found in waitlist. Resending message %s.\n", message.toString());
+                logger.log(Level.INFO, "Not found in waitlist. Resending message {0}.\n", message.toString());
                 sender.send(message);
             }
         }
@@ -68,11 +77,11 @@ public class MessageReceiver {
      * @throws InterruptedException if the current thread was interrupted while waiting.
      * @throws TimeoutException if the wait timed out.
      */
-    public TrackerMessage get(UUID messageId, long timeout, TimeUnit unit)
+    public TrackerMessage get(String messageId, long timeout, TimeUnit unit)
             throws InterruptedException, TimeoutException, ExecutionException {
 
+        // Registers the message ID as being waited for.
         CompletableFuture<TrackerMessage> future = new CompletableFuture<>();
-        System.out.printf("Adding message %s to waitlist.\n", messageId);
         waitList.put(messageId, future);
 
         try {
