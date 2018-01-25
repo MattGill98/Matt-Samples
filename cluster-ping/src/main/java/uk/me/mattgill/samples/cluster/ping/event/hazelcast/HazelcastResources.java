@@ -21,13 +21,19 @@ public class HazelcastResources {
      * the current instance if the cluster only contains itself.
      */
     public String getRandomInstanceId() {
+        // If hazelcast is disabled, return the current instance.
+        if (instance == null) {
+            return getLocalInstanceId();
+        }
+
         // Get all cluster members
         Set<Member> members = new HashSet<>(instance.getCluster().getMembers());
 
         // Remove the local instance, unless it's the only instance
-        if (members.size() > 1) {
-            members.removeIf(x -> x.getUuid().equals(getLocalInstanceId()));
+        if (members.size() <= 1) {
+            return getLocalInstanceId();
         }
+        members.removeIf(x -> x.getUuid().equals(getLocalInstanceId()));
 
         // Pick a random instance
         int randomInstanceNumber = new Random().nextInt(members.size());
@@ -38,9 +44,12 @@ public class HazelcastResources {
     }
 
     /**
-     * @return the ID of the current instance.
+     * @return the ID of the current instance, or 'no-cluster' if clustering is disabled.
      */
     public String getLocalInstanceId() {
+        if (instance == null) {
+            return "no-cluster";
+        }
         return instance.getCluster().getLocalMember().getUuid();
     }
 
