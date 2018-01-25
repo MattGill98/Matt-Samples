@@ -21,16 +21,18 @@
         <module>jpa-sample</module>
         <module>vaadin-test</module>
         <module>jaxrs-hello-world</module>
-	    <module>jms-test</module>
-	    <module>cdi-ear-test</module>
+    	<module>jms-test</module>
+    	<module>cdi-ear-test</module>
         <module>mqtt-test</module>
         <module>kafka-test</module>
         <module>sample-utils</module>
         <module>grizzly-test</module>
         <module>logging-test</module>
         <module>config-api-test</module>
-	    <module>jsf-cdi-test</module>
-	    <module>eventbus-test</module>
+    	<module>jsf-cdi-test</module>
+    	<module>eventbus-test</module>
+    	<module>websocket-test</module>
+    	<module>jaxrs-cluster-ping</module>
     </modules>
     
 </project>
