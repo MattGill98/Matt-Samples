@@ -1,6 +1,7 @@
 # Maven
 target/
 nb-*.xml
+.settings
 
 # Visual Studio
 .vscode/
