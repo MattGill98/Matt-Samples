@@ -23,7 +23,6 @@
     	<module>cluster-ping</module>
         <module>grizzly-sample</module>
         <module>jaxrs-hello-world</module>
-        <module>jms-sample</module>
         <module>jpa-sample</module>
     	<module>jsf-cdi-sample</module>
         <module>logging-sample</module>
