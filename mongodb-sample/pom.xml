@@ -3,28 +3,39 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>uk.me.mattgill.samples</groupId>
-    <artifactId>jaxrs-hello-world</artifactId>
+    <artifactId>mongodb-sample</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>Sample Suite - JAX-RS Hello World</name>
-    <description>A sample project which hosts a 'Hello World' endpoint, and use a JAX-RS extension to log each time it is visited.</description>
-
+    <name>Sample Suite - MongoDB Sample</name>
+    <description>A sample project to show how objects can be persisted to a NoSQL database.</description>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     
     <dependencies>
         <dependency>
+            <groupId>com.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.nosql</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
+            <artifactId>javaee-api</artifactId>
             <version>8.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
+    
     <build>
         <plugins>
             <plugin>

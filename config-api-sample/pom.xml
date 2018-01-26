@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>uk.me.mattgill.samples</groupId>
-    <artifactId>jaxrs-hello-world</artifactId>
+    <artifactId>config-api-sample</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>Sample Suite - JAX-RS Hello World</name>
-    <description>A sample project which hosts a 'Hello World' endpoint, and use a JAX-RS extension to log each time it is visited.</description>
+    <name>Sample Suite - Config API Sample</name>
+    <description>A sample project which hosts an endpoint at the application root. Returns a value depending on deployment context.</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,6 +21,12 @@
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>8.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile.config</groupId>
+            <artifactId>microprofile-config-api</artifactId>
+            <version>1.1</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

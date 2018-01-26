@@ -3,24 +3,23 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>uk.me.mattgill.samples</groupId>
-    <artifactId>jaxrs-hello-world</artifactId>
+    <artifactId>cdi-ear-sample-ejb</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>ejb</packaging>
 
-    <name>Sample Suite - JAX-RS Hello World</name>
-    <description>A sample project which hosts a 'Hello World' endpoint, and use a JAX-RS extension to log each time it is visited.</description>
+    <name>Sample Suite - CDI EAR Sample - EJB</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>8.0</version>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -29,8 +28,11 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.1.0</version>
+                <artifactId>maven-ejb-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <ejbVersion>3.1</ejbVersion>
+                </configuration>
             </plugin>
         </plugins>
     </build>

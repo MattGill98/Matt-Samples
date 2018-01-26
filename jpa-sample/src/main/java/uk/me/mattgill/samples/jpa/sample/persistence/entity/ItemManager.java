@@ -2,6 +2,7 @@ package uk.me.mattgill.samples.jpa.sample.persistence.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,12 +16,12 @@ public class ItemManager {
 
     @Transactional
     public List<Item> getAllItems() {
-        return (List<Item>) em.createNamedQuery("item.getAll").getResultList();
+        return em.createQuery("SELECT i FROM Item i", Item.class).getResultList();
     }
 
     @Transactional
     public List<Item> clearItems() {
-        em.createNamedQuery("item.clearAll").executeUpdate();
+        em.createQuery("DELETE FROM Item").executeUpdate();
         return new ArrayList<>();
     }
 

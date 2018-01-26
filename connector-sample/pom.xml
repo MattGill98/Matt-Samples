@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>uk.me.mattgill.samples</groupId>
-    <artifactId>cluster-ping</artifactId>
+    <artifactId>connector-sample</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>Sample Suite - Cluster Ping</name>
-    <description>A project which pings messages around individual instances in a cluster using CDI events.</description>
+    <name>Sample Suite - Connector Sample</name>
+    <description>A sample project which deploys the Payara Cloud Connectors RAR to connect to the Mosquitto test server.</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,15 +24,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>fish.payara.api</groupId>
-            <artifactId>payara-api</artifactId>
-            <version>5.Beta1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast</artifactId>
-            <version>3.9.2</version>
+            <groupId>fish.payara.cloud.connectors.mqtt</groupId>
+            <artifactId>mqtt-jca-api</artifactId>
+            <version>0.1.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -40,9 +34,23 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.2.0</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <configuration>
+                    <artifact>fish.payara.cloud.connectors.mqtt:mqtt-rar:0.2.0:rar</artifact>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

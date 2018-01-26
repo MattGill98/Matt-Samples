@@ -3,6 +3,7 @@ package uk.me.mattgill.samples.jpa.sample.persistence.tx;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.annotation.Resource;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;

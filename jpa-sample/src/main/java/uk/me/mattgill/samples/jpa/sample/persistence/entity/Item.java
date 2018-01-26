@@ -4,21 +4,16 @@
 package uk.me.mattgill.samples.jpa.sample.persistence.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "item.getAll", query = "SELECT i FROM Item i"),
-    @NamedQuery(name = "item.clearAll", query = "DELETE FROM Item")
-})
 public class Item implements Serializable {
 
-    @Basic
     @Id
+    @Basic
     private String name;
 
     @Basic

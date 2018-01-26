@@ -2,5 +2,9 @@
 target/
 nb-*.xml
 
-# Hidden files
-.*
+# Visual Studio
+.vscode/
+
+# NetBeans
+.classpath
+.project

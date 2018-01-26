@@ -7,7 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Matt Samples</name>
+    <name>Sample Suite</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,22 +16,17 @@
     </properties>
 
     <modules>
-        <module>rest-request</module>
-        <module>mongodb-example</module>
+        <module>mongodb-sample</module>
         <module>jpa-sample</module>
-        <module>vaadin-test</module>
+        <module>vaadin-sample</module>
         <module>jaxrs-hello-world</module>
-    	<module>jms-test</module>
-    	<module>cdi-ear-test</module>
-        <module>mqtt-test</module>
-        <module>kafka-test</module>
-        <module>sample-utils</module>
-        <module>grizzly-test</module>
-        <module>logging-test</module>
-        <module>config-api-test</module>
-    	<module>jsf-cdi-test</module>
-    	<module>eventbus-test</module>
-    	<module>websocket-test</module>
+    	<module>cdi-ear-sample</module>
+        <module>connector-sample</module>
+        <module>grizzly-sample</module>
+        <module>logging-sample</module>
+        <module>config-api-sample</module>
+    	<module>jsf-cdi-sample</module>
+    	<module>cdi-event-sample</module>
     	<module>cluster-ping</module>
     </modules>
     
