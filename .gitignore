@@ -5,6 +5,7 @@ nb-*.xml
 
 # Visual Studio
 .vscode/
+bin/
 
 # NetBeans
 .classpath
