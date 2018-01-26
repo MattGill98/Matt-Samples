@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>uk.me.mattgill.samples</groupId>
-    <artifactId>jaxrs-hello-world</artifactId>
+    <artifactId>jms-sample</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>Sample Suite - JAX-RS Hello World</name>
-    <description>A sample project which hosts a 'Hello World' endpoint, and use a JAX-RS extension to log each time it is visited.</description>
+    <name>Sample Suite - JMS Sample</name>
+    <description>A sample project which uses JMS to send a message and then fetch it again.</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
+            <artifactId>javaee-api</artifactId>
             <version>8.0</version>
             <scope>provided</scope>
         </dependency>
