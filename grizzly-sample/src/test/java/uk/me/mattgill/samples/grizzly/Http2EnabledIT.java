@@ -34,7 +34,7 @@ public class Http2EnabledIT {
         X509TrustManager manager = null;
         SSLContext ctx = null;
 
-        // 
+        // Loads trust store for client
         try (FileInputStream in = new FileInputStream("src/main/resources/cacerts.jks")) {
             KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
             trustStore.load(in, "password".toCharArray());
@@ -45,11 +45,13 @@ public class Http2EnabledIT {
             manager = (X509TrustManager) factory.getTrustManagers()[0];
         }
 
+        // Construct client
         client = new OkHttpClient().newBuilder().sslSocketFactory(ctx.getSocketFactory(), manager)
                 .hostnameVerifier((name, session) -> {
                     return true;
                 }).build();
 
+        // Construct requests
         akamaiRequest = new Request.Builder().url("https://http2.akamai.com/").build();
         request = new Request.Builder().url("https://localhost:9010/").build();
     }
