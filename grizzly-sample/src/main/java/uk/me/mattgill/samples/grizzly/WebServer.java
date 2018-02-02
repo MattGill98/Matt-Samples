@@ -1,6 +1,7 @@
 package uk.me.mattgill.samples.grizzly;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.util.concurrent.Callable;
 import java.util.logging.Handler;
@@ -87,10 +88,27 @@ public class WebServer implements Callable<Boolean>, AutoCloseable {
         // Configure https-listener
         secureListener.setSecure(true);
         SSLContextConfigurator sslContext = new SSLContextConfigurator();
-        sslContext.setKeyStoreFile("src/main/resources/keystore.jks");
-        sslContext.setTrustStoreFile("src/main/resources/cacerts.jks");
-        sslContext.setKeyStorePass("password");
-        sslContext.setTrustStorePass("password");
+        byte[] b = null;
+        // Read in the keystore
+        try (InputStream is = getClass().getResourceAsStream("/keystore.jks")) {
+            b = new byte[is.available()];
+            is.read(b);
+            sslContext.setKeyStoreBytes(b);
+            sslContext.setKeyStorePass("password");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        // Read in the trust store
+        try (InputStream is = getClass().getResourceAsStream("/cacerts.jks")) {
+            b = new byte[is.available()];
+            is.read(b);
+            sslContext.setTrustStoreBytes(b);
+            sslContext.setTrustStorePass("password");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return false;
+        }
         secureListener.setSSLEngineConfig(
                 new SSLEngineConfigurator(sslContext).setClientMode(false).setNeedClientAuth(false));
 
