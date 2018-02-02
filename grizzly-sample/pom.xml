@@ -12,11 +12,13 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     
     <dependencies>
+        <!-- Grizzly dependencies -->
         <dependency>
             <groupId>org.glassfish.grizzly</groupId>
             <artifactId>grizzly-framework</artifactId>
@@ -32,6 +34,8 @@
             <artifactId>grizzly-http2</artifactId>
             <version>2.4.2</version>
         </dependency>
+
+        <!-- HTTP2 and Junit dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -48,27 +52,7 @@
     
     <build>
         <plugins>
-            <!-- Configure unit tests -->
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
-                <configuration>
-                    <argLine>-Xbootclasspath/p:target/grizzly-npn-bootstrap-1.7.jar:target/alpn-boot-8.1.11.v20170118.jar</argLine>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.junit.platform</groupId>
-                        <artifactId>junit-platform-surefire-provider</artifactId>
-                        <version>1.0.1</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.junit.jupiter</groupId>
-                        <artifactId>junit-jupiter-engine</artifactId>
-                        <version>5.0.1</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <!-- Copies the NPN JAR to the target directory -->
+            <!-- Copies the ALPN JARs to the target directory -->
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.0.2</version>
@@ -118,27 +102,67 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Executes the output JAR -->
+            <!-- Manages server in pre-integration-test and post-integration-test -->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
+                <groupId>org.honton.chas</groupId>
+                <artifactId>process-exec-maven-plugin</artifactId>
+                <version>0.9.2</version>
+                <configuration>
+                    <skip>${skipTests}</skip>
+                    <healthCheckUrl>http://localhost:9000</healthCheckUrl>
+                    <arguments>
+                        <argument>java</argument>
+                        <argument>-Xbootclasspath/p:grizzly-npn-bootstrap-1.7.jar</argument>
+                        <argument>-jar</argument>
+                        <argument>grizzly-sample-1.0-SNAPSHOT.jar</argument>
+                    </arguments>
+                </configuration>
                 <executions>
+                    <!-- Start web server -->
                     <execution>
-                        <id>default-cli</id>
+                        <id>start-server</id>
+                        <phase>pre-integration-test</phase>
                         <goals>
-                            <goal>exec</goal>
+                            <goal>start</goal>
                         </goals>
-                        <configuration>
-                            <executable>java</executable>
-                            <arguments>
-                                <argument>-Xbootclasspath/p:target/grizzly-npn-bootstrap-1.7.jar</argument>
-                                <argument>-jar</argument>
-                                <argument>target/grizzly-sample-1.0-SNAPSHOT.jar</argument>
-                            </arguments>
-                        </configuration>
+                    </execution>
+                    <!-- Stop web server -->
+                    <execution>
+                        <id>stop-server</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop-all</goal>
+                        </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <!-- Integration testing plugin -->
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <argLine>-Xbootclasspath/p:target/alpn-boot-8.1.11.v20170118.jar</argLine>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <version>1.0.1</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter-engine</artifactId>
+                        <version>5.0.1</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
