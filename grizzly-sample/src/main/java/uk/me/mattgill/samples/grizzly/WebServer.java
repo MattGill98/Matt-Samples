@@ -78,8 +78,8 @@ public class WebServer implements AutoCloseable {
             sslContext.setTrustStoreBytes(b);
             sslContext.setTrustStorePass("password");
         }
-        listener.setSSLEngineConfig(
-                new SSLEngineConfigurator(sslContext).setClientMode(false).setNeedClientAuth(false));
+        listener.setSSLEngineConfig(new SSLEngineConfigurator(sslContext).setClientMode(false).setNeedClientAuth(false)
+                .setWantClientAuth(false));
     }
 
     /**

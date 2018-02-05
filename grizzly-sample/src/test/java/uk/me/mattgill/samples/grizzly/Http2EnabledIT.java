@@ -2,86 +2,61 @@ package uk.me.mattgill.samples.grizzly;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManagerFactory;
-import javax.net.ssl.X509TrustManager;
-
+import org.glassfish.grizzly.http.HttpContent;
+import org.glassfish.grizzly.http.HttpRequestPacket;
+import org.glassfish.grizzly.http.HttpResponsePacket;
+import org.glassfish.grizzly.http.Method;
+import org.glassfish.grizzly.http.Protocol;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Protocol;
-import okhttp3.Request;
-import okhttp3.Response;
-
 public class Http2EnabledIT {
 
-    private static OkHttpClient client;
-    private static Request request;
-    private static Request akamaiRequest;
+    private static WebServer server;
 
     @BeforeAll
-    public static void initialise() throws KeyStoreException, NoSuchAlgorithmException, CertificateException,
-            IOException, KeyManagementException {
-        X509TrustManager manager = null;
-        SSLContext ctx = null;
-
-        // Loads trust store for client
-        try (FileInputStream in = new FileInputStream("src/main/resources/cacerts.jks")) {
-            KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
-            trustStore.load(in, "password".toCharArray());
-            TrustManagerFactory factory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-            factory.init(trustStore);
-            ctx = SSLContext.getInstance("TLS");
-            ctx.init(null, factory.getTrustManagers(), null);
-            manager = (X509TrustManager) factory.getTrustManagers()[0];
-        }
-
-        // Construct client
-        client = new OkHttpClient().newBuilder().sslSocketFactory(ctx.getSocketFactory(), manager)
-                .hostnameVerifier((name, session) -> {
-                    return true;
-                }).build();
-
-        // Construct requests
-        akamaiRequest = new Request.Builder().url("https://http2.akamai.com/").build();
-        request = new Request.Builder().url("https://localhost:9010/").build();
+    public static void configureServer() throws InterruptedException {
+        server = new WebServer((request, response) -> {
+            response.setContentType("text/plain");
+            response.getWriter().write("Hello Test!");
+        });
+        server.start();
     }
 
-    @Test
-    public void controlGroupHttp2Test() {
-        Response response = null;
-        try {
-            response = client.newCall(akamaiRequest).execute();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        assertTrue(response != null && response.protocol().equals(Protocol.HTTP_2),
-                "Connection to " + akamaiRequest.url().toString()
-                        + " wasn't over HTTP 2.0. This means the HTTP 2.0 testing mechanism is likely broken.");
+    @AfterAll
+    public static void stopServer() {
+        server.close();
     }
 
     @Test
     public void grizzlyHttp2Test() {
-        Response response = null;
-        try {
-            response = client.newCall(request).execute();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        final HttpRequestPacket request = HttpRequestPacket.builder().uri("/").host("localhost").method(Method.GET)
+                .build();
 
-        assertTrue(response != null && response.protocol().equals(Protocol.HTTP_2),
-                "Connection to " + request.url().toString()
-                        + " wasn't over HTTP 2.0. This means the HTTP 2.0 server is likely not working correctly.");
+        try (Http2Client client = new Http2Client("localhost", 9010, 1, TimeUnit.SECONDS)) {
+            HttpContent response = client.get(request, 1, TimeUnit.SECONDS);
+            HttpResponsePacket responsePacket = (HttpResponsePacket) response.getHttpHeader();
+
+            assertTrue(responsePacket.getStatus() == 200, "Request status was not 200.");
+            assertTrue(response.getHttpHeader().getProtocol().equals(Protocol.HTTP_2_0),
+                    "Response wasn't sent over HTTP 2.");
+        } catch (IOException ex) {
+            throw new AssertionError("An exception was thrown while reading the trust store.", ex);
+        } catch (InterruptedException ex) {
+            throw new AssertionError("The thread was interrupted while connecting.", ex);
+        } catch (ExecutionException ex) {
+            throw new AssertionError("The connection failed.", ex);
+        } catch (TimeoutException ex) {
+            throw new AssertionError("The connection timed out.", ex);
+        } catch (Exception ex) {
+            throw new AssertionError("An unexpected exception was thrown.", ex);
+        }
     }
 
 }
