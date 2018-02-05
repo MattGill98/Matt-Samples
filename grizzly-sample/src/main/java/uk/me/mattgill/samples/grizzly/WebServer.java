@@ -115,6 +115,7 @@ public class WebServer implements Callable<Boolean>, AutoCloseable {
         // Configure HTTP/2 support
         Http2Configuration config = Http2Configuration.builder().build();
         Http2AddOn http2Addon = new Http2AddOn(config);
+        listener.registerAddOn(http2Addon);
         secureListener.registerAddOn(http2Addon);
 
         // Add listeners and handler

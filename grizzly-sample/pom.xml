@@ -102,6 +102,28 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Run server normally -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                <workingDirectory>target</workingDirectory>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-Xbootclasspath/p:grizzly-npn-bootstrap-1.7.jar</argument>
+                        <argument>-jar</argument>
+                        <argument>grizzly-sample-1.0-SNAPSHOT.jar</argument>
+                    </arguments>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- Manages server in pre-integration-test and post-integration-test -->
             <plugin>
                 <groupId>org.honton.chas</groupId>
