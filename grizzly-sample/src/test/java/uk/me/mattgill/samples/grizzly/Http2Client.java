@@ -53,7 +53,8 @@ public class Http2Client implements AutoCloseable {
         // Configure filter chain
         FilterChain clientChain = FilterChainBuilder.stateless().add(new TransportFilter())
                 .add(new SSLFilter(null, getClientSSLEngineConfigurator())).add(new HttpClientFilter())
-                .add(new Http2ClientFilter(Http2Configuration.builder().priorKnowledge(true).build()))
+                .add(new Http2ClientFilter(
+                        Http2Configuration.builder().priorKnowledge(false).build()))
                 .add(new BaseFilter() {
                     @Override
                     public NextAction handleRead(FilterChainContext ctx) throws IOException {
@@ -102,8 +103,8 @@ public class Http2Client implements AutoCloseable {
             sslContext.setTrustStorePass("password");
         }
         return new SSLEngineConfigurator(sslContext).setClientMode(true).setNeedClientAuth(false)
-                .setWantClientAuth(false)
-                .setEnabledCipherSuites(new String[] { "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256" });
+                .setWantClientAuth(false).setEnabledCipherSuites(new String[] { "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+                        "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" });
     }
 
     @Override
