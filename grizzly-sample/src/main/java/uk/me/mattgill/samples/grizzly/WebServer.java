@@ -138,7 +138,6 @@ public class WebServer implements AutoCloseable {
     public WebServer() {
         this((request, response) -> {
             response.setContentType("text/plain");
-            response.setCharacterEncoding("utf-8");
             response.getWriter().write("Hello World!");
         });
     }

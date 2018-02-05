@@ -14,6 +14,7 @@ interface FunctionalHttpHandler {
             @Override
             public void service(Request request, Response response) throws Exception {
                 doService(request, response);
+                response.setCharacterEncoding("utf-8");
             }
         };
     }
