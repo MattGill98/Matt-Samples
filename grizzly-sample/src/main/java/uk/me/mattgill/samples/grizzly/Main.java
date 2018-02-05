@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 public class Main {
 
@@ -15,7 +16,7 @@ public class Main {
         System.setProperty("java.util.logging.SimpleFormatter.format", "[%4$s] %5$s\n");
 
         // Creates a new web server
-        try (WebServer server = new WebServer()) {
+        try (WebServer server = new WebServer(Level.INFO)) {
             ExecutorService executor = Executors.newSingleThreadExecutor();
             executor.submit(server::start);
             executor.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);

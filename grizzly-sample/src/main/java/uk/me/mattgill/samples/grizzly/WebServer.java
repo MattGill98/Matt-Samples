@@ -78,8 +78,13 @@ public class WebServer implements AutoCloseable {
             sslContext.setTrustStoreBytes(b);
             sslContext.setTrustStorePass("password");
         }
-        listener.setSSLEngineConfig(new SSLEngineConfigurator(sslContext).setClientMode(false).setNeedClientAuth(false)
-                .setWantClientAuth(false));
+        SSLEngineConfigurator configurator = new SSLEngineConfigurator(sslContext)
+                .setClientMode(false)
+                .setNeedClientAuth(false)
+                .setWantClientAuth(true)
+                .setEnabledCipherSuites(new String[] { "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+                        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"});
+        listener.setSSLEngineConfig(configurator);
     }
 
     /**
@@ -127,19 +132,15 @@ public class WebServer implements AutoCloseable {
         httpServer.getServerConfiguration().addHttpHandler(handler.convert(), "/");
     }
 
-    public WebServer(int port, int securePort, FunctionalHttpHandler handler) {
-        this(port, securePort, Level.INFO, handler);
-    }
-
-    public WebServer(FunctionalHttpHandler handler) {
-        this(9000, 9010, handler);
-    }
-
-    public WebServer() {
-        this((request, response) -> {
+    public WebServer(int port, int securePort, Level level) {
+        this(port, securePort, level, (request, response) -> {
             response.setContentType("text/plain");
             response.getWriter().write("Hello World!");
         });
+    }
+
+    public WebServer(Level level) {
+        this(9000, 9010, level);
     }
 
 }
