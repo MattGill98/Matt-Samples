@@ -17,7 +17,7 @@ public class Main {
         // Creates a new web server
         try (WebServer server = new WebServer()) {
             ExecutorService executor = Executors.newSingleThreadExecutor();
-            executor.submit(server);
+            executor.submit(server::start);
             executor.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
         }
     }
