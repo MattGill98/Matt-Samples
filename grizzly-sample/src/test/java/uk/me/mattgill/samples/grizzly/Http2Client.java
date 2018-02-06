@@ -105,8 +105,9 @@ public class Http2Client implements AutoCloseable {
         }
         return new SSLEngineConfigurator(sslContext)
                 .setClientMode(true)
-                .setEnabledCipherSuites(new String[] { "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
-                        "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" });
+                .setEnabledProtocols(new String[]{"TLSv1.2"})
+                .setEnabledCipherSuites(new String[] { "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+                        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256" });
     }
 
     @Override

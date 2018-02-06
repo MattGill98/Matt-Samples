@@ -81,9 +81,7 @@ public class WebServer implements AutoCloseable {
         SSLEngineConfigurator configurator = new SSLEngineConfigurator(sslContext)
                 .setClientMode(false)
                 .setNeedClientAuth(false)
-                .setWantClientAuth(true)
-                .setEnabledCipherSuites(new String[] { "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
-                        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"});
+                .setWantClientAuth(true);
         listener.setSSLEngineConfig(configurator);
     }
 
