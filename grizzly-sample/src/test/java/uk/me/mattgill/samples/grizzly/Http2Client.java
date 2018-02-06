@@ -1,9 +1,11 @@
 package uk.me.mattgill.samples.grizzly;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.Socket;
+import java.net.SocketAddress;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -55,7 +57,8 @@ public class Http2Client implements AutoCloseable {
                 .add(new SSLFilter(null, getClientSSLEngineConfigurator()))
                 .add(new HttpClientFilter())
                 .add(new Http2ClientFilter(
-                        Http2Configuration.builder().priorKnowledge(false).build()))
+                        Http2Configuration.builder()
+                                .build()))
                 .add(new BaseFilter() {
                     @Override
                     public NextAction handleRead(FilterChainContext ctx) throws IOException {
@@ -71,8 +74,9 @@ public class Http2Client implements AutoCloseable {
             throw new ExecutionException(e);
         }
 
-        conn = transport.connect(host, port).get(timeout, unit);
-        assertTrue(conn != null, "The connection was null.");
+        SocketAddress address = new Socket(host, port).getRemoteSocketAddress();
+        conn = transport.connect(address).get(timeout, unit);
+        assertFalse(conn == null, "The connection was null.");
     }
 
     /**
@@ -106,8 +110,10 @@ public class Http2Client implements AutoCloseable {
         return new SSLEngineConfigurator(sslContext)
                 .setClientMode(true)
                 .setEnabledProtocols(new String[]{"TLSv1.2"})
-                .setEnabledCipherSuites(new String[] { "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
-                        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256" });
+                .setProtocolConfigured(true)
+                .setEnabledCipherSuites(new String[] { "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256",
+                        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256" })
+                .setCipherConfigured(true);
     }
 
     @Override
