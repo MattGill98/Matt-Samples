@@ -115,7 +115,7 @@
                 <configuration>
                     <argLine>-Xbootclasspath/p:target/grizzly-npn-bootstrap-1.7.jar</argLine>
                     <systemPropertyVariables>
-                        <javax.net.debug>all</javax.net.debug>
+                        <!--<javax.net.debug>ssl</javax.net.debug>-->
                     </systemPropertyVariables>
                 </configuration>
                 <executions>

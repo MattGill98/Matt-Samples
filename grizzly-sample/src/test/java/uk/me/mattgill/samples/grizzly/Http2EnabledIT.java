@@ -35,34 +35,6 @@ public class Http2EnabledIT {
     }
 
     @Test
-    public void controlGroupHttp2Test() {
-        final HttpRequestPacket request = HttpRequestPacket.builder()
-                .uri("/grizzly/")
-                .host("javaee.github.io")
-                .method(Method.GET)
-                .build();
-
-        try (Http2Client client = new Http2Client("javaee.github.io", 443, true, 10, TimeUnit.MINUTES)) {
-            HttpContent response = client.get(request, 1, TimeUnit.SECONDS);
-            HttpResponsePacket responsePacket = (HttpResponsePacket) response.getHttpHeader();
-
-            assertTrue(responsePacket.getStatus() == 200, "Request status was not 200.");
-            assertTrue(response.getHttpHeader().getProtocol().equals(Protocol.HTTP_2_0),
-                    "Response wasn't sent over HTTP 2.");
-        } catch (IOException ex) {
-            throw new AssertionError("An exception was thrown while reading the trust store.", ex);
-        } catch (InterruptedException ex) {
-            throw new AssertionError("The thread was interrupted while connecting.", ex);
-        } catch (ExecutionException ex) {
-            throw new AssertionError("The connection failed.", ex);
-        } catch (TimeoutException ex) {
-            throw new AssertionError("The connection timed out.", ex);
-        } catch (Exception ex) {
-            throw new AssertionError("An unexpected exception was thrown.", ex);
-        }
-    }
-
-    @Test
     public void grizzlyHttp2Test() {
         final HttpRequestPacket request = HttpRequestPacket.builder()
                 .uri("/")
