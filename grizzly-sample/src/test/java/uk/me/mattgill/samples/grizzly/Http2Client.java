@@ -39,6 +39,7 @@ public class Http2Client implements AutoCloseable {
      * 
      * @param host the host to connect to.
      * @param port the port of the host to connect to.
+     * @param isSecure if the connection should be secure.
      * @param timeout the amount of time to wait for the connection.
      * @param unit the unit of time to wait for the connection.
      * 
@@ -47,14 +48,14 @@ public class Http2Client implements AutoCloseable {
      * @throws ExecutionException if an error is thrown while connecting.
      * @throws TimeoutException if the connection timed out.
      */
-    public Http2Client(String host, int port, long timeout, TimeUnit unit)
+    @SuppressWarnings("unchecked")
+    public Http2Client(String host, int port, boolean isSecure, long timeout, TimeUnit unit)
             throws IOException, InterruptedException, ExecutionException, TimeoutException {
         conn = null;
         result = new CompletableFuture<>();
 
         // Configure filter chain
         FilterChain clientChain = FilterChainBuilder.stateless().add(new TransportFilter())
-                .add(new SSLFilter(null, getClientSSLEngineConfigurator()))
                 .add(new HttpClientFilter())
                 .add(new Http2ClientFilter(
                         Http2Configuration.builder()
@@ -66,6 +67,10 @@ public class Http2Client implements AutoCloseable {
                         return ctx.getStopAction();
                     }
                 }).build();
+        
+        if (isSecure) {
+            clientChain.add(clientChain.indexOfType(TransportFilter.class) + 1, new SSLFilter(null, getClientSSLEngineConfigurator()));
+        }
 
         final TCPNIOTransport transport = TCPNIOTransportBuilder.newInstance().setProcessor(clientChain).build();
         try {
@@ -74,9 +79,11 @@ public class Http2Client implements AutoCloseable {
             throw new ExecutionException(e);
         }
 
-        SocketAddress address = new Socket(host, port).getRemoteSocketAddress();
-        conn = transport.connect(address).get(timeout, unit);
-        assertFalse(conn == null, "The connection was null.");
+        try (Socket socket = new Socket(host, port)) {
+            SocketAddress address = socket.getRemoteSocketAddress();
+            conn = (Connection<HttpContent>) transport.connect(address).get(timeout, unit);
+            assertFalse(conn == null, "The connection was null.");
+        }
     }
 
     /**

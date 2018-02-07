@@ -38,11 +38,11 @@ public class Http2EnabledIT {
     public void controlGroupHttp2Test() {
         final HttpRequestPacket request = HttpRequestPacket.builder()
                 .uri("/")
-                .host("http2.akamai.com")
+                .host("stackexchange.com")
                 .method(Method.GET)
                 .build();
 
-        try (Http2Client client = new Http2Client("http2.akamai.com", 443, 1, TimeUnit.SECONDS)) {
+        try (Http2Client client = new Http2Client("stackexchange.com", 443, true, 1, TimeUnit.SECONDS)) {
             HttpContent response = client.get(request, 1, TimeUnit.SECONDS);
             HttpResponsePacket responsePacket = (HttpResponsePacket) response.getHttpHeader();
 
@@ -70,7 +70,7 @@ public class Http2EnabledIT {
                 .method(Method.GET)
                 .build();
 
-        try (Http2Client client = new Http2Client("localhost", 9010, 1, TimeUnit.SECONDS)) {
+        try (Http2Client client = new Http2Client("localhost", 9010, true, 1, TimeUnit.SECONDS)) {
             HttpContent response = client.get(request, 1, TimeUnit.SECONDS);
             HttpResponsePacket responsePacket = (HttpResponsePacket) response.getHttpHeader();
 
