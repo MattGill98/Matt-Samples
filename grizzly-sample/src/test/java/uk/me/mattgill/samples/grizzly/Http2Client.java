@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.Socket;
-import java.net.SocketAddress;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -69,7 +67,8 @@ public class Http2Client implements AutoCloseable {
                 }).build();
         
         if (isSecure) {
-            clientChain.add(clientChain.indexOfType(TransportFilter.class) + 1, new SSLFilter(null, getClientSSLEngineConfigurator()));
+            clientChain.add(clientChain.indexOfType(TransportFilter.class) + 1,
+                    new SSLFilter(null, getClientSSLEngineConfigurator()));
         }
 
         final TCPNIOTransport transport = TCPNIOTransportBuilder.newInstance().setProcessor(clientChain).build();
@@ -79,11 +78,8 @@ public class Http2Client implements AutoCloseable {
             throw new ExecutionException(e);
         }
 
-        try (Socket socket = new Socket(host, port)) {
-            SocketAddress address = socket.getRemoteSocketAddress();
-            conn = (Connection<HttpContent>) transport.connect(address).get(timeout, unit);
-            assertFalse(conn == null, "The connection was null.");
-        }
+        conn = (Connection<HttpContent>) transport.connect(host, port).get(timeout, unit);
+        assertFalse(conn == null, "The connection was null.");
     }
 
     /**

@@ -37,12 +37,12 @@ public class Http2EnabledIT {
     @Test
     public void controlGroupHttp2Test() {
         final HttpRequestPacket request = HttpRequestPacket.builder()
-                .uri("/")
-                .host("stackexchange.com")
+                .uri("/grizzly/")
+                .host("javaee.github.io")
                 .method(Method.GET)
                 .build();
 
-        try (Http2Client client = new Http2Client("stackexchange.com", 443, true, 1, TimeUnit.SECONDS)) {
+        try (Http2Client client = new Http2Client("javaee.github.io", 443, true, 10, TimeUnit.MINUTES)) {
             HttpContent response = client.get(request, 1, TimeUnit.SECONDS);
             HttpResponsePacket responsePacket = (HttpResponsePacket) response.getHttpHeader();
 
