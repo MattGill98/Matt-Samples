@@ -16,6 +16,7 @@
     </properties>
 
     <modules>
+        <module>bean-validation</module>
         <module>cdi-connector-sample</module>
     	<module>cdi-ear-sample</module>
     	<module>cdi-event-sample</module>
