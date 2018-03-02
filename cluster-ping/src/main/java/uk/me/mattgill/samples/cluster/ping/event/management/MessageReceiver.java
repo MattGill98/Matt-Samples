@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -34,7 +35,7 @@ public class MessageReceiver {
 
     @PostConstruct
     public void init() {
-        waitList = new HashMap<>();
+        waitList = new ConcurrentHashMap<>();
     }
 
     /**
@@ -63,30 +64,33 @@ public class MessageReceiver {
         }
     }
 
+    
     /**
      * Wait to receive a message from the CDI event bus. After the timeout expires, a TimeoutException is thrown.
      * 
-     * @param messageId the ID of the message to wait for.
-     * @param timeout the amount of time to wait for the message.
+     * @param message the ID of the message to wait for.
      * @param timeout the amount of time to wait for the message.
      * @param unit the timeout unit.
+     * @return 
      * 
      * @throws CancellationException if the wait was cancelled.
      * @throws ExecutionException if the wait completed exceptionally.
      * @throws InterruptedException if the current thread was interrupted while waiting.
      * @throws TimeoutException if the wait timed out.
      */
-    public TrackerMessage get(String messageId, long timeout, TimeUnit unit)
+    public TrackerMessage get(TrackerMessage message, long timeout, TimeUnit unit)
             throws InterruptedException, TimeoutException, ExecutionException {
 
         // Registers the message ID as being waited for.
         CompletableFuture<TrackerMessage> future = new CompletableFuture<>();
-        waitList.put(messageId, future);
+        waitList.put(message.getId(), future);
+        // Send the message across the cluster.
+        sender.send(message);
 
         try {
             return future.get(timeout, unit);
         } finally {
-            waitList.remove(messageId);
+            waitList.remove(message.getId());
         }
     }
 

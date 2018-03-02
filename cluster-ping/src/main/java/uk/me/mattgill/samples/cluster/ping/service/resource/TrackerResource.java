@@ -1,8 +1,10 @@
 package uk.me.mattgill.samples.cluster.ping.service.resource;
 
+import com.hazelcast.logging.Logger;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -16,7 +18,6 @@ import javax.ws.rs.core.Response;
 
 import uk.me.mattgill.samples.cluster.ping.event.entity.TrackerMessage;
 import uk.me.mattgill.samples.cluster.ping.event.management.MessageReceiver;
-import uk.me.mattgill.samples.cluster.ping.event.management.MessageSender;
 
 @Path("/")
 @RequestScoped
@@ -25,8 +26,7 @@ public class TrackerResource {
     @Inject
     private MessageReceiver receiver;
 
-    @Inject
-    private MessageSender sender;
+   
 
     /**
      * Endpoint for sending a message across the cluster.
@@ -44,12 +44,10 @@ public class TrackerResource {
         TrackerMessage message = new TrackerMessage(messageText);
 
         try {
-            // Send the message across the cluster.
-            sender.send(message);
-
             // Wait for it to return, and return the contents.
-            return receiver.get(message.getId(), 5, TimeUnit.SECONDS).toString();
+            return receiver.get(message, 5, TimeUnit.SECONDS).toString();
         } catch (InterruptedException | TimeoutException | ExecutionException e) {
+            Logger.getLogger("cluster-ping").log(Level.SEVERE, "Error handling request for " + message.getId());
             throw new WebApplicationException(Response.serverError().entity(e.getMessage()).build());
         }
     }
