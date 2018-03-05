@@ -57,7 +57,7 @@
                                 <artifactItem>
                                     <groupId>org.glassfish.grizzly</groupId>
                                     <artifactId>grizzly-npn-bootstrap</artifactId>
-                                    <version>1.7</version>
+                                    <version>1.8</version>
                                 </artifactItem>
                             </artifactItems>
                             <outputDirectory>target</outputDirectory>
@@ -71,6 +71,7 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
                     <transformers>
                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                             <mainClass>uk.me.mattgill.samples.grizzly.Main</mainClass>
@@ -79,7 +80,6 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
                         </goals>
@@ -95,7 +95,7 @@
                 <workingDirectory>target</workingDirectory>
                     <executable>java</executable>
                     <arguments>
-                        <argument>-Xbootclasspath/p:grizzly-npn-bootstrap-1.7.jar</argument>
+                        <argument>-Xbootclasspath/p:grizzly-npn-bootstrap-1.8.jar</argument>
                         <argument>-jar</argument>
                         <argument>grizzly-sample-1.0-SNAPSHOT.jar</argument>
                     </arguments>
@@ -113,7 +113,7 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
-                    <argLine>-Xbootclasspath/p:target/grizzly-npn-bootstrap-1.7.jar</argLine>
+                    <argLine>-Xbootclasspath/p:target/grizzly-npn-bootstrap-1.8.jar</argLine>
                     <systemPropertyVariables>
                         <!--<javax.net.debug>ssl</javax.net.debug>-->
                     </systemPropertyVariables>
