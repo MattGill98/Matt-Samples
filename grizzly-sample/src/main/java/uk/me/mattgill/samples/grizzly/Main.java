@@ -16,7 +16,7 @@ public class Main {
         System.setProperty("java.util.logging.SimpleFormatter.format", "[%4$s] %5$s\n");
 
         // Creates a new web server
-        try (WebServer server = new WebServer(Level.FINEST)) {
+        try (WebServer server = new WebServer(Level.INFO)) {
             ExecutorService executor = Executors.newSingleThreadExecutor();
             executor.submit(server::start);
             executor.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
