@@ -103,7 +103,7 @@ public class WebServer implements AutoCloseable {
         setLogLevel(logLevel);
 
         // Create web listeners
-        NetworkListener listener = new NetworkListener("http-listener", NetworkListener.DEFAULT_NETWORK_HOST, port, 3);
+        NetworkListener listener = new NetworkListener("http-listener", NetworkListener.DEFAULT_NETWORK_HOST, port);
         NetworkListener secureListener = new NetworkListener("https-listener", NetworkListener.DEFAULT_NETWORK_HOST,
                 securePort);
 
