@@ -1,5 +1,7 @@
 package uk.me.mattgill.samples.payara.embedded;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,9 +22,12 @@ public class Main {
             glassfishProperties.setPort("https-listener", 8081);
             GlassFish glassfish = runtime.newGlassFish(glassfishProperties);
             glassfish.start();
+            glassfish.getDeployer().deploy(new URI("https://community.jboss.org/servlet/JiveServlet/download/588259-27006/clusterjsp.war"), "--name", "clusterjsp", "--contextroot", "/");
             glassfish.stop();
         } catch (GlassFishException ex) {
             LOGGER.log(Level.SEVERE, "Error starting server.", ex);
-        }
+        } catch (URISyntaxException ex) {
+            LOGGER.log(Level.SEVERE, "Error fetching clusterjsp.", ex);
+		}
     }
 }
