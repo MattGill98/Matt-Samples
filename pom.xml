@@ -11,6 +11,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
@@ -18,16 +19,17 @@
     <modules>
         <module>bean-validation</module>
         <module>cdi-connector-sample</module>
-    	<module>cdi-ear-sample</module>
-    	<module>cdi-event-sample</module>
+        <module>cdi-ear-sample</module>
+        <module>cdi-event-sample</module>
+        <module>clustered-singleton</module>
         <module>config-api-sample</module>
         <module>connector-sample</module>
-    	<module>cluster-ping</module>
+        <module>cluster-ping</module>
         <module>grizzly-sample</module>
         <module>jaxrs-hello-world</module>
         <module>jdbc-sample</module>
         <module>jpa-sample</module>
-    	<module>jsf-cdi-sample</module>
+        <module>jsf-cdi-sample</module>
         <module>logging-sample</module>
         <module>mongodb-sample</module>
         <module>payara-embedded-sample</module>
