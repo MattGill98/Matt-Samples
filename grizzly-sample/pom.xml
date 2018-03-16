@@ -96,6 +96,7 @@
                     <executable>java</executable>
                     <arguments>
                         <argument>-Xbootclasspath/p:grizzly-npn-bootstrap-1.8.jar</argument>
+                        <argument>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9009</argument>
                         <argument>-jar</argument>
                         <argument>grizzly-sample-1.0-SNAPSHOT.jar</argument>
                     </arguments>
