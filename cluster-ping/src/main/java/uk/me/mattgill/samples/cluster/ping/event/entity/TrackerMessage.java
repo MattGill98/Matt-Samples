@@ -1,34 +1,30 @@
 package uk.me.mattgill.samples.cluster.ping.event.entity;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Queue;
 import java.util.UUID;
 
-/**
- * A message to be propogated across the cluster.
- * Every time the message is deserialised, it increases the ping count
- * as it has been received as a message.
- */
 public class TrackerMessage implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private final String id;
     private final String message;
-    private int pingCount;
+    private final Queue<String> route;
+    private final String routeString;
 
-    public TrackerMessage(String message) {
-        this.message = message;
-        this.pingCount = 0;
+    public TrackerMessage(String message, Collection<String> route) {
         this.id = UUID.randomUUID().toString();
+        this.message = message;
+        this.route = new ArrayDeque<>(route);
+        this.routeString = Arrays.toString(route.toArray());
     }
 
-    /**
-     * @return the ID of the message.
-     */
-    public String getId() {
-        return id;
+    public String getDestination() {
+        return route.poll();
     }
 
     /**
@@ -36,15 +32,18 @@ public class TrackerMessage implements Serializable {
      */
     @Override
     public String toString() {
-        return String.format("{id = '%s', message = '%s', pingCount = '%d'}", id, message, pingCount);
+        return String.format("{id = '%s', message = '%s', route = '%s'}", id, message, routeString);
     }
 
-    /**
-     * Whenever this object is received, it has been 'pinged', so the pingCount will increase.
-     */
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        in.defaultReadObject();
-        pingCount++;
+    @Override
+    public boolean equals(Object compare) {
+        if (compare instanceof TrackerMessage) {
+            TrackerMessage message = (TrackerMessage) compare;
+            if (id.equals(message.id)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
