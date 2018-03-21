@@ -27,7 +27,7 @@
         <dependency>
             <groupId>fish.payara.api</groupId>
             <artifactId>payara-api</artifactId>
-            <version>5.Beta1</version>
+            <version>5.181</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
