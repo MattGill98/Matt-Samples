@@ -92,13 +92,12 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                <workingDirectory>target</workingDirectory>
                     <executable>java</executable>
                     <arguments>
-                        <argument>-Xbootclasspath/p:grizzly-npn-bootstrap-1.8.jar</argument>
+                        <argument>-Xbootclasspath/p:${project.build.directory}/grizzly-npn-bootstrap-1.8.jar</argument>
                         <argument>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9009</argument>
                         <argument>-jar</argument>
-                        <argument>grizzly-sample-1.0-SNAPSHOT.jar</argument>
+                        <argument>${project.build.directory}/grizzly-sample-1.0-SNAPSHOT.jar</argument>
                     </arguments>
                 </configuration>
                 <executions>
@@ -114,7 +113,7 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
-                    <argLine>-Xbootclasspath/p:target/grizzly-npn-bootstrap-1.8.jar</argLine>
+                    <argLine>-Xbootclasspath/p:${project.build.directory}/grizzly-npn-bootstrap-1.8.jar</argLine>
                     <systemPropertyVariables>
                         <!--<javax.net.debug>ssl</javax.net.debug>-->
                     </systemPropertyVariables>
