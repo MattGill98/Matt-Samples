@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
 
 import javax.ws.rs.NameBinding;
 
-@Target({TYPE, METHOD})
-@Retention(RUNTIME)
 @NameBinding
+@Target({ TYPE, METHOD })
+@Retention(RUNTIME)
 public @interface TracedEndpoint {
 
 }

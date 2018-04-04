@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="openliberty-server">
+
+    <featureManager>
+        <feature>jaxrs-2.0</feature>
+        <feature>mpOpenAPI-1.0</feature>
+    </featureManager>
+
+    <httpEndpoint id="defaultHttpEndpoint"
+        httpPort="${http.port}"
+        httpsPort="${https.port}"/>
+
+    <application location="${project.build.directory}/${project.build.finalName}.war" name="app1" contextroot="app1" />
+    <application location="${project.build.directory}/${project.build.finalName}.war" name="app2" contextroot="app2" />
+
+    <httpSession cookieName="liberty-cookie"/>
+
+    <logging consoleLogLevel="INFO" />
+
+</server>
