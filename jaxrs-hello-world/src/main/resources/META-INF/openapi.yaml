@@ -1,0 +1,7 @@
+openapi: 3.0.0
+info:
+  title: HELLO WORLD
+  description: TEST APPLICATION.
+  version: TEST-VERSION
+servers:
+- url: http://localhost:9010

@@ -20,8 +20,13 @@
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
+            <version>8.0</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile.openapi</groupId>
+            <artifactId>microprofile-openapi-api</artifactId>
+            <version>1.0.1</version>
         </dependency>
     </dependencies>
 
@@ -31,6 +36,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.2.0</version>
+                <configuration>
+                    <packagingExcludes>pom.xml</packagingExcludes>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>net.wasdev.wlp.maven.plugins</groupId>
@@ -43,26 +51,13 @@
                         <version>18.0.0.1</version>
                         <type>zip</type>
                     </assemblyArtifact>
-                    <configFile>${project.build.directory}/server.xml</configFile>
+                    <configFile>${project.build.directory}/classes/server.xml</configFile>
                     <bootstrapProperties>
-                        <http.port>9000</http.port>
-                        <https.port>9010</https.port>
+                        <app.artifact>${project.build.directory}/${project.artifactId}-${project.version}.war</app.artifact>
                     </bootstrapProperties>
                 </configuration>
             </plugin>
         </plugins>
-
-        <!-- Copy the server.xml, replacing all variables -->
-        <resources>
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-                <targetPath>${project.build.directory}</targetPath>
-                <filtering>true</filtering>
-                <includes>
-                    <include>server.xml</include>
-                </includes>
-            </resource>
-        </resources>
     </build>
 
 </project>
