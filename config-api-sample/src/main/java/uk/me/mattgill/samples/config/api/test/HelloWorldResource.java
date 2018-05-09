@@ -14,12 +14,12 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 public class HelloWorldResource {
 
     @Inject
-    @ConfigProperty(name = "config.contextname", defaultValue = "unknown")
-    private String contextname;
+    @ConfigProperty(name = "config.custom.var", defaultValue = "UNKNOWN")
+    private String var;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String helloWorld() {
-        return "Hello from context: " + contextname;
+        return "var = " + var;
     }
 }
