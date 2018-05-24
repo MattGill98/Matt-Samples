@@ -19,14 +19,15 @@
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
+            <artifactId>javaee-api</artifactId>
             <version>8.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.microprofile.openapi</groupId>
-            <artifactId>microprofile-openapi-api</artifactId>
-            <version>1.0.1</version>
+            <groupId>org.eclipse.microprofile.config</groupId>
+            <artifactId>microprofile-config-api</artifactId>
+            <version>1.2.1</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -52,6 +53,7 @@
                         <type>zip</type>
                     </assemblyArtifact>
                     <configFile>${project.build.directory}/classes/server.xml</configFile>
+                    <include>war</include>
                     <bootstrapProperties>
                         <app.artifact>${project.build.directory}/${project.artifactId}-${project.version}.war</app.artifact>
                     </bootstrapProperties>

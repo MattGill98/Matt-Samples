@@ -23,7 +23,6 @@ public class Main {
             GlassFish glassfish = runtime.newGlassFish(glassfishProperties);
             glassfish.start();
             glassfish.getDeployer().deploy(new URI("https://community.jboss.org/servlet/JiveServlet/download/588259-27006/clusterjsp.war"), "--name", "clusterjsp", "--contextroot", "/");
-            glassfish.stop();
         } catch (GlassFishException ex) {
             LOGGER.log(Level.SEVERE, "Error starting server.", ex);
         } catch (URISyntaxException ex) {
