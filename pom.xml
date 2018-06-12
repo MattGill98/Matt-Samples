@@ -33,6 +33,7 @@
         <module>jsf-cdi-sample</module>
         <module>logging-sample</module>
         <module>mongodb-sample</module>
+        <module>openapi-sample</module>
         <module>payara-embedded-sample</module>
         <module>vaadin-sample</module>
         <module>fault-tolerance-sample</module>
