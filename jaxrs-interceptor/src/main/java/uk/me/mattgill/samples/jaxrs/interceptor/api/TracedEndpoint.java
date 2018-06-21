@@ -1,4 +1,4 @@
-package uk.me.mattgill.samples.jaxrs.hello.world.api;
+package uk.me.mattgill.samples.jaxrs.interceptor.api;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;

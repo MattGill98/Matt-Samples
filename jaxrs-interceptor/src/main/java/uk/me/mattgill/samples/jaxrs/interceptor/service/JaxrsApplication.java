@@ -1,4 +1,4 @@
-package uk.me.mattgill.samples.jaxrs.hello.world.service;
+package uk.me.mattgill.samples.jaxrs.interceptor.service;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

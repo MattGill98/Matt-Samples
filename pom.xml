@@ -28,6 +28,7 @@
         <module>ejb-remote-sample</module>
         <module>grizzly-sample</module>
         <module>jaxrs-hello-world</module>
+        <module>jaxrs-interceptor</module>
         <module>jdbc-sample</module>
         <module>jpa-sample</module>
         <module>jsf-cdi-sample</module>
