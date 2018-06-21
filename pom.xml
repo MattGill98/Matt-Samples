@@ -35,6 +35,7 @@
         <module>mongodb-sample</module>
         <module>openapi-sample</module>
         <module>payara-embedded-sample</module>
+        <module>payara-resource-scanner</module>
         <module>vaadin-sample</module>
         <module>fault-tolerance-sample</module>
     </modules>
