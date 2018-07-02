@@ -29,6 +29,7 @@
         <module>grizzly-sample</module>
         <module>jaxrs-hello-world</module>
         <module>jaxrs-interceptor</module>
+        <module>jaxrs-interface</module>
         <module>jdbc-sample</module>
         <module>jpa-sample</module>
         <module>jsf-cdi-sample</module>
