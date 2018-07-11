@@ -22,19 +22,17 @@
 
         <!-- Popup -->
         <h:form>
-            <h:commandButton value="Call the popup">
+            <h:commandButton value="Open Popup" action="@this">
                 <rich:componentControl target="popup" operation="show" />
             </h:commandButton>
-            <rich:popupPanel id="popup" modal="false" autosized="true" resizeable="false">
+            <rich:popupPanel id="popup" modal="false" autosized="true" resizeable="false"
+                    onclick="#{rich:component('popup')}.hide(); return false;">
                 <f:facet name="header">
-                    <h:outputText value="Simple popup panel" />
+                    <h:outputText value="Simple Popup Panel" />
                 </f:facet>
                 <f:facet name="controls">
-                    <h:outputLink value="#" onclick="#{rich:component('popup')}.hide(); return false;" style="color: inherit">
-                        X
-                    </h:outputLink>
                 </f:facet>
-                <p>Any content might be inside this panel.</p>
+                <p>Click to dismiss.</p>
             </rich:popupPanel>
         </h:form>
     </h:body>
