@@ -1,0 +1,13 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j">
+    <h:head>
+        <title>A4J MediaOutput Test</title>
+    </h:head>
+    <h:body>
+        This is a test:
+        <br/>
+        <a4j:mediaOutput element="img" cacheable="false" createContent="#{mediaBean.paint}" value="#{mediaData}" mimeType="image/jpeg"/>
+    </h:body>
+</html>

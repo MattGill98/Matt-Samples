@@ -38,6 +38,7 @@
         <module>openapi-sample</module>
         <module>payara-embedded-sample</module>
         <module>payara-resource-scanner</module>
+        <module>richfaces-sample</module>
         <module>servlet-sample</module>
         <module>vaadin-sample</module>
         <module>fault-tolerance-sample</module>
