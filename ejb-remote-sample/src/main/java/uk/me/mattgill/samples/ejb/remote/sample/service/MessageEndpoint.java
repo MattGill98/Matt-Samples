@@ -29,7 +29,7 @@ public class MessageEndpoint {
             props.put(Context.SECURITY_PRINCIPAL, "username");
             props.put(Context.SECURITY_CREDENTIALS, "password");
             return MessageBean.class
-                    .cast(new InitialContext(props).lookup("java:global/ejb-remote-sample-1.0-SNAPSHOT/SecureBean"))
+                    .cast(new InitialContext(props).lookup("java:module/SecureBean"))
                     .getMessage();
         } catch (EJBAccessException ex) {
             LOGGER.log(Level.WARNING, "Unable to get secure message, fetching insecure message.");
