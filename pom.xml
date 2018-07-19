@@ -18,6 +18,7 @@
 
     <modules>
         <module>bean-validation</module>
+        <module>batch-sample</module>
         <module>cdi-connector-sample</module>
         <module>cdi-ear-sample</module>
         <module>cdi-event-sample</module>
@@ -33,6 +34,7 @@
         <module>jdbc-sample</module>
         <module>jpa-sample</module>
         <module>jsf-cdi-sample</module>
+        <module>jsp-sample</module>
         <module>logging-sample</module>
         <module>mongodb-sample</module>
         <module>openapi-sample</module>
