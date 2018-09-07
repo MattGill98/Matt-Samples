@@ -9,6 +9,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
+    <name>Sample Suite - RichFaces Sample</name>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.6</maven.compiler.source>
