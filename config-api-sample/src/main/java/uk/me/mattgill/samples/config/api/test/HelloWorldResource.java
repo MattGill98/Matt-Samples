@@ -13,13 +13,15 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 @RequestScoped
 public class HelloWorldResource {
 
+    private static final String VAR_NAME = "custom.var";
+
     @Inject
-    @ConfigProperty(name = "config.custom.var", defaultValue = "UNKNOWN")
+    @ConfigProperty(name = VAR_NAME, defaultValue = "UNKNOWN")
     private String var;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String helloWorld() {
-        return "var = " + var;
+        return VAR_NAME + " = " + var;
     }
 }
