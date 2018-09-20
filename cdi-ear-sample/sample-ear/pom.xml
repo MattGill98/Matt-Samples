@@ -21,22 +21,11 @@
             <artifactId>cdi-ear-sample-ejb</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>ejb</type>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>uk.me.mattgill.samples</groupId>
-            <artifactId>cdi-ear-sample-enabled-resources</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>war</type>
-        </dependency>
-        <dependency>
-            <groupId>uk.me.mattgill.samples</groupId>
-            <artifactId>cdi-ear-sample-disabled-resources</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>war</type>
-        </dependency>
-        <dependency>
-            <groupId>uk.me.mattgill.samples</groupId>
-            <artifactId>cdi-ear-sample-implicit-resources</artifactId>
+            <artifactId>cdi-ear-sample-war</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>war</type>
         </dependency>
@@ -51,29 +40,17 @@
                 <version>2.10.1</version>
                 <configuration>
                     <applicationName>${project.build.finalName}</applicationName>
-                    <modules>
+                    <modules><!--
                         <ejbModule>
                             <groupId>uk.me.mattgill.samples</groupId>
                             <artifactId>cdi-ear-sample-ejb</artifactId>
                             <bundleFileName>cdi-ear-sample-ejb.jar</bundleFileName>
-                        </ejbModule>
+                        </ejbModule>-->
                         <webModule>
                             <groupId>uk.me.mattgill.samples</groupId>
-                            <artifactId>cdi-ear-sample-enabled-resources</artifactId>
-                            <bundleFileName>cdi-ear-sample-enabled-resources.war</bundleFileName>
-                            <contextRoot>/cdi-enabled</contextRoot>
-                        </webModule>
-                        <webModule>
-                            <groupId>uk.me.mattgill.samples</groupId>
-                            <artifactId>cdi-ear-sample-disabled-resources</artifactId>
-                            <bundleFileName>cdi-ear-sample-disabled-resources.war</bundleFileName>
-                            <contextRoot>/cdi-disabled</contextRoot>
-                        </webModule>
-                        <webModule>
-                            <groupId>uk.me.mattgill.samples</groupId>
-                            <artifactId>cdi-ear-sample-implicit-resources</artifactId>
-                            <bundleFileName>cdi-ear-sample-implicit-resources.war</bundleFileName>
-                            <contextRoot>/cdi-implicit</contextRoot>
+                            <artifactId>cdi-ear-sample-war</artifactId>
+                            <bundleFileName>cdi-ear-sample-war.war</bundleFileName>
+                            <contextRoot>/</contextRoot>
                         </webModule>
                     </modules>
                 </configuration>

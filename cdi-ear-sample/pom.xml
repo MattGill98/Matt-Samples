@@ -12,9 +12,7 @@
     
     <modules>
         <module>sample-ejb</module>
-        <module>sample-disabled-resources</module>
-        <module>sample-enabled-resources</module>
-        <module>sample-implicit-resources</module>
+        <module>sample-war</module>
         <module>sample-ear</module>
     </modules>
     
