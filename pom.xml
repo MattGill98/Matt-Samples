@@ -26,6 +26,7 @@
         <module>config-api-sample</module>
         <module>connector-sample</module>
         <module>cluster-ping</module>
+        <module>custom-realm</module>
         <module>ejb-remote-sample</module>
         <module>grizzly-sample</module>
         <module>jaxrs-hello-world</module>
