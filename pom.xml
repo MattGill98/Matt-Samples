@@ -29,6 +29,7 @@
         <module>custom-realm</module>
         <module>ejb-remote-sample</module>
         <module>grizzly-sample</module>
+        <module>jacc-provider</module>
         <module>jaxrs-hello-world</module>
         <module>jaxrs-interceptor</module>
         <module>jaxrs-interface</module>
