@@ -14,11 +14,11 @@ import javax.naming.NamingException;
 
 public class JndiTest {
 
+    private static final String QUEUE_NAME = "jms/myQueue";
+    private static final String CONNECTION_FACTORY_NAME = "jms/myConnFactory";
+
     public static InitialContext createContext() throws NamingException {
         Properties props = new Properties();
-        props.setProperty("java.naming.factory.initial", "com.sun.enterprise.naming.SerialInitContextFactory");
-        props.setProperty("java.naming.factory.url.pkgs", "com.sun.enterprise.naming");
-        props.setProperty("java.naming.factory.state", "com.sun.corba.ee.impl.presentation.rmi.JNDIStateFactoryImpl");
         props.setProperty("org.omg.CORBA.ORBInitialHost", "127.0.0.1");
         props.setProperty("org.omg.CORBA.ORBInitialPort", "3700");
         props.setProperty("com.sun.corba.ee.transport.ORBWaitForResponseTimeout","5000");
@@ -39,7 +39,7 @@ public class JndiTest {
         System.out.println("Context Created");
 
         // JNDI Lookup for QueueConnectionFactory
-        QueueConnectionFactory factory = (QueueConnectionFactory) ctx.lookup("jms/myConnFactory");
+        QueueConnectionFactory factory = (QueueConnectionFactory) ctx.lookup(CONNECTION_FACTORY_NAME);
         System.out.println("Factory found.");
 
         // Create a Connection from QueueConnectionFactory
@@ -47,7 +47,7 @@ public class JndiTest {
         // Initialise the communication session
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         // JNDI Lookup for the Queue in remote JMS Provider
-        Queue queue = (Queue) ctx.lookup("jms/myQueue");
+        Queue queue = (Queue) ctx.lookup(QUEUE_NAME);
 
         // Receive messages
         MessageConsumer mc = session.createConsumer(queue);
