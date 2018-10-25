@@ -6,6 +6,7 @@ nb-*.xml
 # Visual Studio
 .vscode/
 bin/
+.factorypath
 
 # NetBeans
 .classpath
