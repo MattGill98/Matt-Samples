@@ -5,14 +5,13 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 
 @Stateless
-public class InsecureBean implements MessageBean {
+public class InsecureBean implements Bean {
 
     private static final Logger LOGGER = Logger.getLogger(InsecureBean.class.getName());
 
     @Override
-    public String getMessage() {
+    public void doSomething() {
         LOGGER.info("Returning message from insecure bean!");
-        return "This is an insecure message!";
     }
 
 }
