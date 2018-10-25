@@ -35,6 +35,7 @@
         <module>jaxrs-interface</module>
         <module>jaxws-hello-world</module>
         <module>jdbc-sample</module>
+        <module>jms-client</module>
         <module>jpa-sample</module>
         <module>jsf-cdi-sample</module>
         <module>jsp-sample</module>
