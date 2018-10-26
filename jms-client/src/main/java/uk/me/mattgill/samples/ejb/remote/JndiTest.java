@@ -17,16 +17,12 @@ public class JndiTest {
     private static final String QUEUE_NAME = "jms/myQueue";
     private static final String CONNECTION_FACTORY_NAME = "jms/myConnFactory";
 
-    public static InitialContext createContext() throws NamingException {
-        Properties props = new Properties();
-        props.setProperty("org.omg.CORBA.ORBInitialHost", "127.0.0.1");
-        props.setProperty("org.omg.CORBA.ORBInitialPort", "3700");
-        // Create the initial context for remote JMS server
-        InitialContext ctx = new InitialContext(props);
-        return ctx;
-    }
+    private static final String HOST_NAME = "127.0.0.1";
+    private static final String SECURE_PORT = "3820";
+    private static final String TRUSTSTORE_NAME = "/opt/payara/default/appserver/glassfish/domains/domain1/config/cacerts.jks";
+    private static final String TRUSTSTORE_PASSWORD = "changeit";
 
-    public static void main(String [] args) throws Exception {
+    public static void main(String[] args) throws Exception {
 
         // Print java version
         System.out.println("Java version: " + System.getProperty("java.version"));
@@ -71,6 +67,19 @@ public class JndiTest {
                 System.out.println("Shutdown complete.");
             }
         }));
+    }
+
+    public static InitialContext createContext() throws NamingException {
+        System.setProperty("javax.net.ssl.trustStore", TRUSTSTORE_NAME);
+        System.setProperty("javax.net.ssl.trustStorePassword", TRUSTSTORE_PASSWORD);
+        System.setProperty("org.omg.CORBA.ORBInitialPort", SECURE_PORT);
+        System.setProperty("com.sun.CSIV2.ssl.standalone.client.required", "true");
+        Properties props = new Properties();
+        props.setProperty("org.omg.CORBA.ORBInitialHost", HOST_NAME);
+        props.setProperty("org.omg.CORBA.ORBInitialPort", SECURE_PORT);
+        // Create the initial context for remote JMS server
+        InitialContext ctx = new InitialContext(props);
+        return ctx;
     }
 
 }
