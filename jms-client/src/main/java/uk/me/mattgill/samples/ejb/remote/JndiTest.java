@@ -21,9 +21,6 @@ public class JndiTest {
         Properties props = new Properties();
         props.setProperty("org.omg.CORBA.ORBInitialHost", "127.0.0.1");
         props.setProperty("org.omg.CORBA.ORBInitialPort", "3700");
-        props.setProperty("com.sun.corba.ee.transport.ORBWaitForResponseTimeout","5000");
-        props.setProperty("com.sun.corba.ee.transport.ORBTCPConnectTimeouts","100:500:100:500");
-        props.setProperty("com.sun.corba.ee.transport.ORBTCPTimeouts","500:2000:50:1000");
         // Create the initial context for remote JMS server
         InitialContext ctx = new InitialContext(props);
         return ctx;
