@@ -10,29 +10,25 @@ import javax.jms.Queue;
 import javax.jms.QueueConnectionFactory;
 import javax.jms.Session;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 public class JndiTest {
 
-    private static final String QUEUE_NAME = "jms/myQueue";
-    private static final String CONNECTION_FACTORY_NAME = "jms/myConnFactory";
-
-    private static final String HOST_NAME = "127.0.0.1";
-    private static final String SECURE_PORT = "3820";
-    private static final String TRUSTSTORE_NAME = "/opt/payara/default/appserver/glassfish/domains/domain1/config/cacerts.jks";
-    private static final String TRUSTSTORE_PASSWORD = "changeit";
-
     public static void main(String[] args) throws Exception {
+
+        // Load properties
+        Properties connectionProperties = new Properties();
+        connectionProperties.load(JndiTest.class.getClassLoader().getResourceAsStream("connection.properties"));
+        System.getProperties().putAll(connectionProperties);
 
         // Print java version
         System.out.println("Java version: " + System.getProperty("java.version"));
 
         // Create initial context
-        InitialContext ctx = createContext();
+        InitialContext ctx = new InitialContext(connectionProperties);
         System.out.println("Context Created");
 
         // JNDI Lookup for QueueConnectionFactory
-        QueueConnectionFactory factory = (QueueConnectionFactory) ctx.lookup(CONNECTION_FACTORY_NAME);
+        QueueConnectionFactory factory = (QueueConnectionFactory) ctx.lookup(connectionProperties.getProperty("CONNECTION_FACTORY_NAME"));
         System.out.println("Factory found.");
 
         // Create a Connection from QueueConnectionFactory
@@ -40,7 +36,7 @@ public class JndiTest {
         // Initialise the communication session
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         // JNDI Lookup for the Queue in remote JMS Provider
-        Queue queue = (Queue) ctx.lookup(QUEUE_NAME);
+        Queue queue = (Queue) ctx.lookup(connectionProperties.getProperty("QUEUE_NAME"));
 
         // Receive messages
         MessageConsumer mc = session.createConsumer(queue);
@@ -67,19 +63,6 @@ public class JndiTest {
                 System.out.println("Shutdown complete.");
             }
         }));
-    }
-
-    public static InitialContext createContext() throws NamingException {
-        System.setProperty("javax.net.ssl.trustStore", TRUSTSTORE_NAME);
-        System.setProperty("javax.net.ssl.trustStorePassword", TRUSTSTORE_PASSWORD);
-        System.setProperty("org.omg.CORBA.ORBInitialPort", SECURE_PORT);
-        System.setProperty("com.sun.CSIV2.ssl.standalone.client.required", "true");
-        Properties props = new Properties();
-        props.setProperty("org.omg.CORBA.ORBInitialHost", HOST_NAME);
-        props.setProperty("org.omg.CORBA.ORBInitialPort", SECURE_PORT);
-        // Create the initial context for remote JMS server
-        InitialContext ctx = new InitialContext(props);
-        return ctx;
     }
 
 }
