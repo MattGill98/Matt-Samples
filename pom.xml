@@ -25,6 +25,7 @@
         <module>clustered-singleton</module>
         <module>config-api-sample</module>
         <module>connector-sample</module>
+        <module>corba-sample</module>
         <module>cluster-ping</module>
         <module>custom-realm</module>
         <module>ejb-remote-sample</module>
