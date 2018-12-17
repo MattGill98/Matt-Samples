@@ -21,9 +21,20 @@
         <dependency>
             <groupId>fish.payara.extras</groupId>
             <artifactId>payara-embedded-all</artifactId>
-            <version>5.181</version>
+            <version>5.184</version>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>payara-staging</id>
+            <url>https://nexus.payara.fish/content/repositories/payara-staging/</url>
+        </repository>
+        <repository>
+            <id>payara-patches</id>
+            <url>https://nexus.payara.fish/content/repositories/payara-patches/</url>
+        </repository>
+    </repositories>
     
     <build>
         <plugins>
