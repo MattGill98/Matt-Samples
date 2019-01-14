@@ -22,7 +22,7 @@ public class Http2EnabledIT {
 
     @BeforeAll
     public static void configureServer() throws InterruptedException {
-        server = new WebServer(9000, 9010, Level.INFO, (request, response) -> {
+        server = new WebServer(9000, 9010, (request, response) -> {
             response.setContentType("text/plain");
             response.getWriter().write("Hello Test!");
         });

@@ -42,7 +42,7 @@ public class WebServer implements AutoCloseable {
             httpServer.addListener(listener);
         }
         if (securePort != null) {
-            NetworkListener secureListener = createNetworkListener("https-listener", NetworkListener.DEFAULT_NETWORK_HOST, port, true);
+            NetworkListener secureListener = createNetworkListener("https-listener", NetworkListener.DEFAULT_NETWORK_HOST, securePort, true);
             httpServer.addListener(secureListener);
         }
 
@@ -67,8 +67,8 @@ public class WebServer implements AutoCloseable {
             try {
                 httpServer.start();
                 running = true;
-            } catch (IOException e) {
-                LOGGER.warning("Web server failed to start.");
+            } catch (IOException ex) {
+                LOGGER.log(Level.WARNING, "Web server failed to start.", ex);
             }
         } else {
             LOGGER.info("Web server already started!");
@@ -138,7 +138,7 @@ public class WebServer implements AutoCloseable {
                 listener.setSecure(true);
                 listener.setSSLEngineConfig(configurator);
             } catch (IOException ex) {
-                LOGGER.warning("Error encountered while configuring secure listener. Making listener insecure.");
+                LOGGER.log(Level.WARNING, "Error encountered while configuring secure listener. Making listener insecure.");
             }
         }
 
