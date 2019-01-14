@@ -56,7 +56,9 @@ public class MessageEndpoint {
         // Attempt to lookup insecure EJB using JNDI
         try {
             Hashtable<String, String> props = new Hashtable<>(2);
-            Bean.class.cast(new InitialContext(props).lookup("java:module/InsecureBean")).doSomething();
+            InitialContext ctx = new InitialContext(props);
+            Object lookupResult = ctx.lookup("java:module/InsecureBean");
+            Bean.class.cast(lookupResult).doSomething();
             result.add(INSECURE_JNDI_NAME, true);
         } catch (Throwable t) {
             result.add(INSECURE_JNDI_NAME, t.getCause().getMessage());
