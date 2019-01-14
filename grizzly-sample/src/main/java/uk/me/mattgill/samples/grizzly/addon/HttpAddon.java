@@ -9,6 +9,18 @@ import org.glassfish.grizzly.http.server.Response;
 
 public class HttpAddon implements GrizzlyAddon {
 
+    private String path;
+    private FunctionalHttpHandler handler;
+
+    public HttpAddon(String path, FunctionalHttpHandler handler) {
+        this.handler = handler;
+    }
+
+    @Override
+    public void register(HttpServer httpServer) {
+        httpServer.getServerConfiguration().addHttpHandler(handler.convert(), path);
+    }
+
     @FunctionalInterface
     public interface FunctionalHttpHandler {
 
@@ -24,18 +36,6 @@ public class HttpAddon implements GrizzlyAddon {
             };
         }
 
-    }
-
-    private String path;
-    private FunctionalHttpHandler handler;
-
-    public HttpAddon(String path, FunctionalHttpHandler handler) {
-        this.handler = handler;
-    }
-
-    @Override
-    public void register(HttpServer httpServer) {
-        httpServer.getServerConfiguration().addHttpHandler(handler.convert(), path);
     }
 
 }

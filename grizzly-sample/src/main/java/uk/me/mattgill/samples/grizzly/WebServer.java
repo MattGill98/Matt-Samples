@@ -91,7 +91,7 @@ public class WebServer implements AutoCloseable {
     ///// Private methods
 
     private void configureLogLevels() {
-        Level level = Level.INFO;
+        Level level = Level.FINE;
         Logger rootLogger = Logger.getLogger("");
         rootLogger.setLevel(level);
         for (Handler h : rootLogger.getHandlers()) {
@@ -135,20 +135,15 @@ public class WebServer implements AutoCloseable {
                         .setWantClientAuth(false);
                 listener.setSecure(true);
                 listener.setSSLEngineConfig(configurator);
+
+                // Configure HTTP/2 support
+                Http2Configuration config = Http2Configuration.builder().build();
+                Http2AddOn http2Addon = new Http2AddOn(config);
+                listener.registerAddOn(http2Addon);
             } catch (IOException ex) {
                 LOGGER.log(Level.WARNING, "Error encountered while configuring secure listener. Making listener insecure.");
             }
         }
-
-        // Configure HTTP/2 support
-        Http2Configuration config = Http2Configuration.builder().build();
-        Http2AddOn http2Addon = new Http2AddOn(config);
-        listener.registerAddOn(http2Addon);
-        listener.registerAddOn(http2Addon);
-
-        // Websockets configuration
-        final WebSocketAddOn websocketAddon = new WebSocketAddOn();
-        listener.registerAddOn(websocketAddon);
 
         return listener;
     }
