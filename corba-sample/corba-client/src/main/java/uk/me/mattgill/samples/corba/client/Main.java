@@ -35,6 +35,10 @@ public class Main {
             }
             message = message.trim();
 
+            if (message.isEmpty()) {
+                message = "Hello World!";
+            }
+
             Main.run("127.0.0.1", "3700", message);
 
         } catch (Throwable t) {

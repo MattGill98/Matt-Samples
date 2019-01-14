@@ -1,7 +1,5 @@
 package uk.me.mattgill.samples.corba;
 
-import java.io.Serializable;
-
 import javax.ejb.Stateless;
 
 import uk.me.mattgill.samples.corba.common.LogResult;
