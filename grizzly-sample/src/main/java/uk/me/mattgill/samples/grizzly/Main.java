@@ -1,25 +1,17 @@
 package uk.me.mattgill.samples.grizzly;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
+import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args)
-            throws InterruptedException, ClassNotFoundException, InstantiationException, IllegalAccessException,
-            IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+    public static void main(String[] args) throws IOException {
 
         // Configures the logging format.
         System.setProperty("java.util.logging.SimpleFormatter.format", "[%4$s] %5$s\n");
 
-        // Creates a new web server
-        try (WebServer server = new WebServer(Level.INFO)) {
-            ExecutorService executor = Executors.newSingleThreadExecutor();
-            executor.submit(server::start);
-            executor.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
+        try (WebServer server = new WebServer()) {
+            server.start();
+            System.in.read();
         }
     }
 }
