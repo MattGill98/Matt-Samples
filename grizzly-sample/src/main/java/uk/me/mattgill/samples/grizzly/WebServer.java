@@ -12,6 +12,9 @@ import org.glassfish.grizzly.http2.Http2AddOn;
 import org.glassfish.grizzly.http2.Http2Configuration;
 import org.glassfish.grizzly.ssl.SSLContextConfigurator;
 import org.glassfish.grizzly.ssl.SSLEngineConfigurator;
+import org.glassfish.grizzly.websockets.WebSocketAddOn;
+
+import uk.me.mattgill.samples.grizzly.addon.GrizzlyAddon;
 
 public class WebServer implements AutoCloseable {
 
@@ -26,10 +29,9 @@ public class WebServer implements AutoCloseable {
      * 
      * @param port The port to run the insecure web server on.
      * @param securePort The port to run the secure web server on.
-     * @param handler the handler to assign to the root of the server. Defines what to do on a request.
      * @throws IOException if there was an error reading in the keystore or truststore.
      */
-    public WebServer(Integer port, Integer securePort, FunctionalHttpHandler handler) {
+    public WebServer(Integer port, Integer securePort) {
         this.httpServer = new HttpServer();
         this.running = false;
 
@@ -45,20 +47,14 @@ public class WebServer implements AutoCloseable {
             NetworkListener secureListener = createNetworkListener("https-listener", NetworkListener.DEFAULT_NETWORK_HOST, securePort, true);
             httpServer.addListener(secureListener);
         }
-
-        // Add handler
-        httpServer.getServerConfiguration().addHttpHandler(handler.convert(), "/");
-    }
-
-    public WebServer(int port, int securePort) {
-        this(port, securePort, (request, response) -> {
-            response.setContentType("text/plain");
-            response.getWriter().write("Hello World!");
-        });
     }
 
     public WebServer() {
         this(9000, 9010);
+    }
+
+    public void registerAddon(GrizzlyAddon addon) {
+        addon.register(httpServer);
     }
 
     public boolean start() {
@@ -91,6 +87,8 @@ public class WebServer implements AutoCloseable {
             LOGGER.info("Web server isn't running!");
         }
     }
+
+    ///// Private methods
 
     private void configureLogLevels() {
         Level level = Level.INFO;
@@ -147,6 +145,10 @@ public class WebServer implements AutoCloseable {
         Http2AddOn http2Addon = new Http2AddOn(config);
         listener.registerAddOn(http2Addon);
         listener.registerAddOn(http2Addon);
+
+        // Websockets configuration
+        final WebSocketAddOn websocketAddon = new WebSocketAddOn();
+        listener.registerAddOn(websocketAddon);
 
         return listener;
     }

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.logging.Level;
+
 import org.glassfish.grizzly.http.HttpContent;
 import org.glassfish.grizzly.http.HttpRequestPacket;
 import org.glassfish.grizzly.http.HttpResponsePacket;
@@ -16,16 +16,19 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import uk.me.mattgill.samples.grizzly.addon.HttpAddon;
+
 public class Http2EnabledIT {
 
     private static WebServer server;
 
     @BeforeAll
     public static void configureServer() throws InterruptedException {
-        server = new WebServer(9000, 9010, (request, response) -> {
+        server = new WebServer(9000, 9010);
+        server.registerAddon(new HttpAddon("/", (request, response) -> {
             response.setContentType("text/plain");
             response.getWriter().write("Hello Test!");
-        });
+        }));
         server.start();
     }
 
