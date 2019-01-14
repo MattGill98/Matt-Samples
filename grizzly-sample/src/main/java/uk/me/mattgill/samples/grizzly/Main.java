@@ -2,7 +2,7 @@ package uk.me.mattgill.samples.grizzly;
 
 import java.io.IOException;
 
-import org.glassfish.grizzly.websockets.DataFrame;
+import org.glassfish.grizzly.http.HttpRequestPacket;
 import org.glassfish.grizzly.websockets.WebSocket;
 import org.glassfish.grizzly.websockets.WebSocketApplication;
 
@@ -27,24 +27,7 @@ public class Main {
             server.registerAddon(httpAddon);
 
             // Create WebsocketAddon
-            GrizzlyAddon websocketAddon = new WebSocketAddon("/", new WebSocketApplication() {
-                @Override
-                public void onConnect(WebSocket socket) {
-                    System.out.println(socket.toString());
-                    super.onConnect(socket);
-                }
-
-                @Override
-                public void onClose(WebSocket socket, DataFrame frame) {
-                    System.out.println(socket.toString());
-                    super.onClose(socket, frame);
-                }
-                @Override
-                public void onMessage(WebSocket socket, String text) {
-                    socket.send(text);
-                    super.onMessage(socket, text);
-                }
-            });
+            GrizzlyAddon websocketAddon = new WebSocketAddon("/*", (socket, text) -> socket.send(text));
             server.registerAddon(websocketAddon);
 
             // Start the server

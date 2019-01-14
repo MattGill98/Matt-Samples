@@ -91,7 +91,7 @@ public class WebServer implements AutoCloseable {
     ///// Private methods
 
     private void configureLogLevels() {
-        Level level = Level.FINE;
+        Level level = Level.INFO;
         Logger rootLogger = Logger.getLogger("");
         rootLogger.setLevel(level);
         for (Handler h : rootLogger.getHandlers()) {
