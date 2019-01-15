@@ -27,7 +27,9 @@ public class Main {
             server.registerAddon(httpAddon);
 
             // Create WebsocketAddon
-            GrizzlyAddon websocketAddon = new WebSocketAddon("/*", (socket, text) -> socket.send(text));
+            GrizzlyAddon websocketAddon = new WebSocketAddon("/*", (socket, text) -> {
+                socket.send(new StringBuilder(text).reverse().toString());
+            });
             server.registerAddon(websocketAddon);
 
             // Start the server

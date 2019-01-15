@@ -55,6 +55,7 @@ public class WebServer implements AutoCloseable {
 
     public void registerAddon(GrizzlyAddon addon) {
         addon.register(httpServer);
+        LOGGER.info(addon.getClass().getSimpleName() + " registered.");
     }
 
     public boolean start() {
