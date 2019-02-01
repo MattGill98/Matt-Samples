@@ -136,15 +136,15 @@ public class WebServer implements AutoCloseable {
                         .setWantClientAuth(false);
                 listener.setSecure(true);
                 listener.setSSLEngineConfig(configurator);
-
-                // Configure HTTP/2 support
-                Http2Configuration config = Http2Configuration.builder().build();
-                Http2AddOn http2Addon = new Http2AddOn(config);
-                listener.registerAddOn(http2Addon);
             } catch (IOException ex) {
                 LOGGER.log(Level.WARNING, "Error encountered while configuring secure listener. Making listener insecure.");
             }
         }
+
+        // Configure HTTP/2 support
+        Http2Configuration config = Http2Configuration.builder().build();
+        Http2AddOn http2Addon = new Http2AddOn(config);
+        listener.registerAddOn(http2Addon);
 
         return listener;
     }
