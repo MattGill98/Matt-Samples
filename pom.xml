@@ -24,6 +24,7 @@
         <module>javaee/cdi-connector-sample</module>
         <module>javaee/cdi-ear-sample</module>
         <module>javaee/cdi-event-sample</module>
+        <module>javaee/client-cert-sample</module>
         <module>javaee/clustered-singleton</module>
         <module>javaee/connector-sample</module>
         <module>javaee/corba-sample</module>
