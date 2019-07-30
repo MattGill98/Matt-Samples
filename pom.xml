@@ -38,6 +38,7 @@
         <module>javaee/jms-client</module>
         <module>javaee/jpa-sample</module>
         <module>javaee/jsf-cdi-sample</module>
+        <module>javaee/jsonp-sample</module>
         <module>javaee/jsp-sample</module>
         <module>javaee/logging-sample</module>
         <module>javaee/mongodb-sample</module>
