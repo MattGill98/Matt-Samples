@@ -8,9 +8,17 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>jaxws-hello-world</artifactId>
-    <packaging>war</packaging>
+    <groupId>uk.me.mattgill.samples.ear</groupId>
+    <artifactId>cdi-ear-parent</artifactId>
+    <packaging>pom</packaging>
+    
+    <name>Sample Suite - Java EE - CDI EAR</name>
+    <description>A sample EAR which injects an EJB into different contexts, to show how CDI is handled in EARs</description>
 
-    <name>Sample Suite - Java EE - JAX-WS Hello World</name>
-
+    <modules>
+        <module>cdi-jar</module>
+        <module>cdi-implicit-war</module>
+        <module>cdi-ear</module>
+    </modules>
+    
 </project>

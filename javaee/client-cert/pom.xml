@@ -8,17 +8,17 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>cluster-ping</artifactId>
+    <artifactId>client-cert</artifactId>
     <packaging>war</packaging>
 
-    <name>Sample Suite - Java EE - Cluster Ping</name>
-    <description>A project which pings messages around individual instances in a cluster using CDI events.</description>
+    <name>Sample Suite - Java EE - Client Certificate</name>
+    <description>A sample project which demonstrates client certificate authentication with Payara.</description>
 
     <dependencies>
         <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast</artifactId>
-            <version>3.9.2</version>
+            <groupId>org.glassfish.main.appclient</groupId>
+            <artifactId>gf-client</artifactId>
+            <version>5.1.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

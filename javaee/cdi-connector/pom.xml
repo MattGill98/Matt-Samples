@@ -8,18 +8,17 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>cluster-ping</artifactId>
+    <artifactId>cdi-connector</artifactId>
     <packaging>war</packaging>
 
-    <name>Sample Suite - Java EE - Cluster Ping</name>
-    <description>A project which pings messages around individual instances in a cluster using CDI events.</description>
+    <name>Sample Suite - Java EE - CDI Connector</name>
+    <description>A sample project which creates a MQTT CDI extension and uses it to connect to a Mosquitto MQTT server.</description>
 
     <dependencies>
         <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast</artifactId>
-            <version>3.9.2</version>
-            <scope>provided</scope>
+            <groupId>org.eclipse.paho</groupId>
+            <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+            <version>1.2.1</version>
         </dependency>
     </dependencies>
 

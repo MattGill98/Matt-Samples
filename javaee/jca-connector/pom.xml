@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>uk.me.mattgill.samples.javaee</groupId>
+        <artifactId>javaee-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>jca-connector</artifactId>
+    <packaging>war</packaging>
+
+    <name>Sample Suite - Java EE - JCA Connector</name>
+    <description>A sample project which deploys the Payara Cloud Connectors RAR to connect to the Mosquitto test server.</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>fish.payara.cloud.connectors.mqtt</groupId>
+            <artifactId>mqtt-jca-api</artifactId>
+            <version>0.2.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <configuration>
+                    <artifact>fish.payara.cloud.connectors.mqtt:mqtt-rar:0.2.0:rar</artifact>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

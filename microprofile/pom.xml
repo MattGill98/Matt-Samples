@@ -8,24 +8,26 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>custom-realm</artifactId>
+    <groupId>uk.me.mattgill.samples.microprofile</groupId>
+    <artifactId>microprofile-parent</artifactId>
+    <packaging>pom</packaging>
 
-    <name>Sample Suite - Custom Realm</name>
-    <description>A sample project which contains the classes for a custom Payara realm.</description>
+    <name>Sample Suite - MicroProfile</name>
+
+    <modules>
+        <module>config-api</module>
+        <module>fault-tolerance</module>
+        <module>openapi</module>
+    </modules>
 
     <dependencies>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>8.0.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.main.security</groupId>
-            <artifactId>security</artifactId>
-            <version>5.1.0</version>
+            <groupId>org.eclipse.microprofile</groupId>
+            <artifactId>microprofile</artifactId>
+            <version>2.2</version>
+            <type>pom</type>
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
+    
 </project>

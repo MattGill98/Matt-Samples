@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>uk.me.mattgill.samples</groupId>
-    <artifactId>samples-master</artifactId>
+    <artifactId>samples-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -19,38 +19,22 @@
     <modules>
         <module>custom-realm</module>
         <module>grizzly-sample</module>
-        <module>javaee/bean-validation</module>
-        <module>javaee/batch-sample</module>
-        <module>javaee/cdi-connector-sample</module>
-        <module>javaee/cdi-ear-sample</module>
-        <module>javaee/cdi-event-sample</module>
-        <module>javaee/client-cert-sample</module>
-        <module>javaee/clustered-singleton</module>
-        <module>javaee/connector-sample</module>
-        <module>javaee/corba-sample</module>
-        <module>javaee/cluster-ping</module>
-        <module>javaee/ejb-remote-sample</module>
-        <module>javaee/jacc-provider</module>
-        <module>javaee/jaxrs-hello-world</module>
-        <module>javaee/jaxrs-interceptor</module>
-        <module>javaee/jaxrs-interface</module>
-        <module>javaee/jaxws-hello-world</module>
-        <module>javaee/jdbc-sample</module>
-        <module>javaee/jms-client</module>
-        <module>javaee/jpa-sample</module>
-        <module>javaee/jsf-cdi-sample</module>
-        <module>javaee/jsonp-sample</module>
-        <module>javaee/jsp-sample</module>
-        <module>javaee/logging-sample</module>
-        <module>javaee/mongodb-sample</module>
-        <module>javaee/richfaces-sample</module>
-        <module>javaee/servlet-sample</module>
-        <module>javaee/vaadin-sample</module>
-        <module>microprofile/config-api-sample</module>
-        <module>microprofile/fault-tolerance-sample</module>
-        <module>microprofile/openapi-sample</module>
+        <module>javaee</module>
+        <module>microprofile</module>
         <module>payara-embedded-sample</module>
         <module>payara-resource-scanner</module>
     </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.2.3</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
     
 </project>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>uk.me.mattgill.samples</groupId>
+        <artifactId>samples-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>uk.me.mattgill.samples.javaee</groupId>
+    <artifactId>javaee-parent</artifactId>
+    <packaging>pom</packaging>
+
+    <name>Sample Suite - Java EE</name>
+
+    <modules>
+        <module>bean-validation</module>
+        <module>batch</module>
+        <module>cdi-connector</module>
+        <module>cdi-ear-parent</module>
+        <module>cdi-event</module>
+        <module>client-cert</module>
+        <module>clustered-singleton</module>
+        <module>corba</module>
+        <module>cluster-ping</module>
+        <module>ejb-remote</module>
+        <module>jacc-provider</module>
+        <module>jaxrs-hello-world</module>
+        <module>jaxrs-interceptor</module>
+        <module>jaxrs-interface</module>
+        <module>jaxws-hello-world</module>
+        <module>jca-connector</module>
+        <module>jdbc</module>
+        <module>jms-client</module>
+        <module>jpa</module>
+        <module>jsf-cdi</module>
+        <module>jsonp</module>
+        <module>jsp</module>
+        <module>logging</module>
+        <module>mongodb</module>
+        <module>richfaces</module>
+        <module>servlet</module>
+        <module>vaadin</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>8.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>fish.payara.api</groupId>
+            <artifactId>payara-api</artifactId>
+            <version>5.192</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    
+</project>

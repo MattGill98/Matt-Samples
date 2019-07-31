@@ -8,18 +8,22 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>cluster-ping</artifactId>
+    <artifactId>mongodb</artifactId>
     <packaging>war</packaging>
 
-    <name>Sample Suite - Java EE - Cluster Ping</name>
-    <description>A project which pings messages around individual instances in a cluster using CDI events.</description>
-
+    <name>Sample Suite - Java EE - MongoDB</name>
+    <description>A sample project to show how objects can be persisted to a NoSQL database.</description>
+    
     <dependencies>
         <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast</artifactId>
-            <version>3.9.2</version>
-            <scope>provided</scope>
+            <groupId>com.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.nosql</artifactId>
+            <version>2.7.0</version>
         </dependency>
     </dependencies>
 

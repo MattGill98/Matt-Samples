@@ -2,31 +2,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>uk.me.mattgill.samples</groupId>
+    <parent>
+        <groupId>uk.me.mattgill.samples.javaee</groupId>
+        <artifactId>javaee-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>jms-client</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Sample Suite - JMS Client Sample</name>
+    <name>Sample Suite - Java EE - JMS Client</name>
     <description>A sample project which communicates with a JMS Queue using it's JNDI lookup.</description>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
     
     <dependencies>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>8.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>org.glassfish.main.appclient</groupId>
             <artifactId>gf-client</artifactId>
-            <version>5.183</version>
+            <version>5.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.mq</groupId>

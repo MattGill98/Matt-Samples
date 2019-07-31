@@ -8,18 +8,17 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>cluster-ping</artifactId>
+    <artifactId>jpa</artifactId>
     <packaging>war</packaging>
 
-    <name>Sample Suite - Java EE - Cluster Ping</name>
-    <description>A project which pings messages around individual instances in a cluster using CDI events.</description>
-
+    <name>Sample Suite - Java EE - JPA Sample</name>
+    <description>A sample project which provides endpoints to log items to a MySql database.</description>
+    
     <dependencies>
         <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast</artifactId>
-            <version>3.9.2</version>
-            <scope>provided</scope>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.44</version>
         </dependency>
     </dependencies>
 
