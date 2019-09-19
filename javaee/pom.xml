@@ -26,6 +26,7 @@
         <module>cluster-ping</module>
         <module>ejb-remote</module>
         <module>jacc-provider</module>
+        <module>javamail</module>
         <module>jaxrs-hello-world</module>
         <module>jaxrs-interceptor</module>
         <module>jaxrs-interface</module>
