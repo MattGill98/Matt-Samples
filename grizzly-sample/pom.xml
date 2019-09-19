@@ -134,6 +134,7 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>start-server</id>
                         <goals>
                             <goal>exec</goal>
                         </goals>
