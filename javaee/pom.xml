@@ -25,6 +25,7 @@
         <module>corba</module>
         <module>cluster-ping</module>
         <module>ejb-remote</module>
+        <module>ejb-timers</module>
         <module>jacc-provider</module>
         <module>javamail</module>
         <module>jaxrs-hello-world</module>
