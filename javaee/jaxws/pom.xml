@@ -7,10 +7,18 @@
         <artifactId>javaee-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
-    <artifactId>jaxws-hello-world</artifactId>
-    <packaging>war</packaging>
-
-    <name>Sample Suite - Java EE - JAX-WS Hello World</name>
-
+    
+    <groupId>uk.me.mattgill.samples.javaee.jaxws</groupId>
+    <artifactId>jaxws-parent</artifactId>
+    <packaging>pom</packaging>
+    
+    <name>Sample Suite - Java EE - JAX-WS</name>
+    <description>Client and Server applications to demonstrate JAX-WS.</description>
+    
+    <modules>
+        <module>jaxws-common</module>
+        <module>jaxws-client</module>
+        <module>jaxws-app</module>
+    </modules>
+    
 </project>
