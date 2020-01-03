@@ -14,19 +14,21 @@
     <name>Sample Suite - Java EE - Arquillian Test</name>
     <description>A sample project which demonstrated running Payara integration tests.</description>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
-                <version>1.5.0.Final</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
+        <!-- APIs -->
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile</groupId>
+            <artifactId>microprofile</artifactId>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Unit Testing -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -45,27 +47,69 @@
         </dependency>
     </dependencies>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>1.5.0.Final</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>fish.payara.api</groupId>
+                <artifactId>payara-bom</artifactId>
+                <version>5.194</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <profiles>
         <profile>
-            <id>embedded</id>
+            <id>remote</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
                     <groupId>fish.payara.arquillian</groupId>
+                    <artifactId>arquillian-payara-server-remote</artifactId>
+                    <version>1.1</version>
+                    <scope>test</scope>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>embedded</id>
+            <dependencies>
+                <dependency>
+                    <groupId>fish.payara.arquillian</groupId>
                     <artifactId>arquillian-payara-server-embedded</artifactId>
                     <version>1.1</version>
                     <scope>test</scope>
+                    <optional>true</optional>
                 </dependency>
                 <dependency>
                     <groupId>fish.payara.extras</groupId>
                     <artifactId>payara-embedded-all</artifactId>
-                    <version>5.193.1</version>
+                    <version>5.194</version>
                     <scope>provided</scope>
+                    <optional>true</optional>
                 </dependency>
             </dependencies>
         </profile>
     </profiles>
+
+    <!-- For patched APIs -->
+    <repositories>
+        <repository>
+            <id>payara-patched-externals</id>
+            <name>Payara Patched Externals</name>
+            <url>https://raw.github.com/payara/Payara_PatchedProjects/master</url>
+        </repository>
+    </repositories>
 
 </project>
