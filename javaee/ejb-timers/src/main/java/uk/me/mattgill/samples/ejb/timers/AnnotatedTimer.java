@@ -28,7 +28,7 @@ public class AnnotatedTimer implements Serializable {
         LOGGER.info("Deregistering annotated timer...");
     }
 
-    @Schedule(hour = "*", minute = "*", second = "*/3")
+    @Schedule(hour = "*", minute = "*", second = "*/20")
     public void timeout() {
         LOGGER.info("Annotated timer triggered at " + new Date());
     }

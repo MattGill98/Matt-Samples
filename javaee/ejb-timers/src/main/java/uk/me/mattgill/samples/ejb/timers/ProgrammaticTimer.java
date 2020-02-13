@@ -29,7 +29,7 @@ public class ProgrammaticTimer implements Serializable {
     @PostConstruct
     public void init() {
         LOGGER.info("Registering programmatic timer...");
-        timer = timerService.createTimer(3000, 3000, "Programmatic timer to run every 3 seconds");
+        timer = timerService.createTimer(20000, 20000, "Programmatic timer to run every 20 seconds");
     }
 
     @PreDestroy
