@@ -19,6 +19,7 @@
     <modules>
         <module>custom-realm</module>
         <module>grizzly-sample</module>
+        <module>grpc-sample</module>
         <module>javaee</module>
         <module>microprofile</module>
         <module>payara-embedded-sample</module>
